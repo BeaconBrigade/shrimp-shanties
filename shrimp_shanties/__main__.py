@@ -1,6 +1,7 @@
 import pygame
 
 from shrimp_shanties.front_page import FrontPage
+from shrimp_shanties.state import State
 
 WIDTH = 1000
 HEIGHT = 600
@@ -14,7 +15,9 @@ def main():
     clock = pygame.time.Clock()
     pygame.display.set_caption("Shrimp Shanties")
 
-    state = FrontPage()
+    state = State()
+    State.BASE = state
+    state.push(FrontPage())
 
     running = True
     while running:
@@ -28,7 +31,7 @@ def main():
         state.update(screen)
 
         pygame.display.flip()
-        clock.tick(30)
+        clock.tick(60)
 
 
 if __name__ == "__main__":
