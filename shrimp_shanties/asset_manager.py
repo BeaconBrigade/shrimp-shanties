@@ -45,7 +45,7 @@ class AssetManager:
 
     @staticmethod
     def load_font(name: str, size: int):
-        hash_name = f'font/{name}'
+        hash_name = f'font/{name}/{size}'
         if hash_name in AssetManager.cache:
             return AssetManager.cache[hash_name]
         asset = pygame.font.Font(AssetManager.ASSET_PATH / "fonts" / name, size)
