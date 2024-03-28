@@ -15,13 +15,43 @@
     }
   },
 
-  "#subheading": {
+  "@subheading": {
     "prototype": "#fira-sans-bold",
     "font": {
       "size": "25"
     },
     "colours": {
       "normal_text": "rgb(204, 204, 204)"
+    }
+  },
+
+  "#start-game": {
+    "prototype": "#fira-sans-bold",
+    "colours": {
+      "normal_bg": "hsl(180, 50%, 20%)",
+      "normal_text": "hsl(240, 5%, 90%)",
+      "hovered_bg": "hsl(180, 50%, 25%)",
+      "hovered_text": "hsl(240, 0%, 100%)",
+      "active_bg": "hsl(60, 80%, 20%)",
+      "active_text": "hsl(60, 80%, 50%)",
+      "active_border": "hsl(60, 80%, 50%)"
+    },
+    "font": {
+      "size": "25"
+    },
+    "misc": {
+      "shape": "rounded_rectangle",
+      "shape_corner_radius": "12"
+    }
+  },
+  "#pause-panel": {
+    "colours": {
+      "normal_bg": "hsl(240, 10%, 10%)",
+      "normal_border": "hsl(240, 10%, 10%)"
+    },
+    "misc": {
+      "shape": "rounded_rectangle",
+      "shape_corner_radius": "20"
     }
   }
 }

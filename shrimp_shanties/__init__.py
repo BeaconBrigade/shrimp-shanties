@@ -38,10 +38,11 @@ def main():
                 manager.set_window_resolution((WIDTH, HEIGHT))
 
             manager.process_events(event)
+            game_state.propagate_event(event)
 
         manager.update(delta)
 
-        game_state.update_state(screen)
+        game_state.propagate_draw(screen)
         manager.draw_ui(screen)
 
         pygame.display.flip()
