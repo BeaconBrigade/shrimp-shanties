@@ -1,0 +1,27 @@
+{
+  "#fira-sans-bold": {
+    "font": {
+      "name": "FiraSans-Bold",
+      "regular_path": "../assets/fonts/FiraSans-Bold.ttf"
+    }
+  },
+  "#title": {
+    "prototype": "#fira-sans-bold",
+    "font": {
+      "size": "50"
+    },
+    "colours": {
+      "normal_text": "rgb(235, 247, 238)"
+    }
+  },
+
+  "#subheading": {
+    "prototype": "#fira-sans-bold",
+    "font": {
+      "size": "25"
+    },
+    "colours": {
+      "normal_text": "rgb(204, 204, 204)"
+    }
+  }
+}

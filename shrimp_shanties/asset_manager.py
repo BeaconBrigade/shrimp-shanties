@@ -51,3 +51,7 @@ class AssetManager:
         asset = pygame.font.Font(AssetManager.ASSET_PATH / "fonts" / name, size)
         AssetManager.cache[hash_name] = asset
         return asset
+
+    @staticmethod
+    def load_theme(name: str):
+        return AssetManager.ASSET_PATH / "themes" / name
