@@ -28,6 +28,10 @@ class State:
     def handle_event(self, event):
         pass
 
+    def update(self, delta):
+        if self.child is not None:
+            self.child.update(delta)
+
     def push(self, child):
         if self.child is None:
             child.depth = self.depth + 1

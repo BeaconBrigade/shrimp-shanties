@@ -41,6 +41,7 @@ def main():
             game_state.propagate_event(event)
 
         manager.update(delta)
+        game_state.update(delta)
 
         game_state.propagate_draw(screen)
         manager.draw_ui(screen)
