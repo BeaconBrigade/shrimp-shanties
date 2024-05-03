@@ -1,12 +1,15 @@
+from shrimp_shanties.game.check import ActiveCheck, PassiveCheck
 from shrimp_shanties.game.entity import Entity
+from pygame.event import Event
 
 
 class EntityManager:
     def __init__(self):
-        self.entity_list = []
-        self.event_map = dict()
-        self.event_checks = []
-        self.event_list = []
+        self.entity_list: list[Entity] = []
+        self.event_map: dict[int, list[Entity]] = dict()
+        self.event_checks: list[PassiveCheck] = []
+        self.event_list: list[Event] = []
+        self.check_map: dict[int, list[ActiveCheck]] = dict()
 
     # two ways events are sent to entities:
     # (1) events coming from pygame
@@ -19,14 +22,23 @@ class EntityManager:
 
     def process_events(self):
         for event in self.event_list:
-            entity = self.event_map.get(event.type)
-            if entity is not None:
-                entity.handle_event(event)
+            entities = self.event_map.get(event.type)
+            if entities is not None:
+                for entity in entities:
+                    if entity is not None:
+                        entity.handle_event(event)
+            checks = self.check_map.get(event.type)
+            if checks is None:
+                continue
+            for check in checks:
+                e = check.check(self.event_list, event)
+                if e is not None:
+                    self.event_list.append(e)
 
         self.event_list.clear()
 
     def handle_event(self, event):
-        if self.event_map.get(event.type) is not None:
+        if self.event_map.get(event.type) is not None or self.check_map.get(event.type) is not None:
             self.event_list.append(event)
 
     def draw(self, screen):
@@ -34,9 +46,38 @@ class EntityManager:
             entity.draw(screen)
 
     def add_entity(self, entity: Entity):
+        entity.register_for_events(self)
         self.entity_list.append(entity)
 
     def remove_entity(self, search_id):
         for i, entity in enumerate(self.entity_list):
             if entity.id == search_id:
                 del self.entity_list[search_id]
+
+    def register_event(self, entity: Entity, type):
+        """ Register for a particular entity to receives events of a certain type """
+        if self.event_map.get(type) is not None:
+            self.event_map[type] += entity
+        else:
+            self.event_map[type] = [entity]
+
+    def unregister_event(self, entity: Entity, type):
+        if self.event_map.get(type) is not None:
+            self.event_map[type].remove(entity)
+
+    def register_check(self, check: ActiveCheck, type):
+        """ Register an active check so the check will be called when an event is received """
+        if self.check_map.get(type) is not None:
+            self.check_map[type] += check
+        else:
+            self.check_map[type] = [check]
+
+    def unregister_check(self, check: ActiveCheck, type):
+        if self.check_map.get(type) is not None:
+            self.check_map[type].remove(check)
+
+    def register_passive_check(self, check: PassiveCheck):
+        self.event_checks += check
+
+    def unregister_passive_check(self, check: PassiveCheck):
+        self.event_checks.remove(check)

@@ -28,6 +28,7 @@ class Pause(State):
 
     def draw(self, screen: Surface):
         s = pygame.Surface((WIDTH, HEIGHT), pygame.SRCALPHA)
+        self.get_parent().draw(s)
         shaded = pygame.Color((0, 255, 0)).lerp((32, 20, 46), 0.5)
         s.fill(shaded)
         screen.blit(s, (0, 0))
