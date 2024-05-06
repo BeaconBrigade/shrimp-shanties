@@ -2,10 +2,10 @@ import pygame
 from pygame_gui.elements.ui_label import UILabel
 from pygame import Surface
 
-from . import HEIGHT
-from .asset_manager import AssetManager
-from .connection import Connection
-from .state import State
+from shrimp_shanties import HEIGHT
+from shrimp_shanties.asset_manager import AssetManager
+from shrimp_shanties.menu.connection import Connection
+from shrimp_shanties.state import State
 
 
 class FrontPage(State):

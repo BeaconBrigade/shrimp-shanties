@@ -2,6 +2,11 @@ from shrimp_shanties.game.check import ActiveCheck, PassiveCheck
 from shrimp_shanties.game.entity import Entity
 from pygame.event import Event
 
+from shrimp_shanties.game.next_id import next_event_id
+
+
+PROCESS_TURN = next_event_id()
+
 
 class EntityManager:
     def __init__(self):
@@ -34,6 +39,15 @@ class EntityManager:
                 e = check.check(self.event_list, event)
                 if e is not None:
                     self.event_list.append(e)
+
+        # I know this is inefficient to run through almost every entity twice,
+        # but whatever.
+        # The purpose of the 'PROCESS_TURN' event is to replace having to make a
+        # separate 'update' function on the entity class since they already have
+        # a method for handling updates
+        next_turn = Event(PROCESS_TURN)
+        for entity in self.entity_list:
+            entity.handle_event(next_turn)
 
         self.event_list.clear()
 

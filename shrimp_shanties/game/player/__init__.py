@@ -4,9 +4,10 @@ from pygame.event import Event
 
 from shrimp_shanties import WIDTH, HEIGHT, AssetManager
 from shrimp_shanties.game.entity.hitbox import Hitbox
+from shrimp_shanties.game.next_id import next_event_id
 
 
-PLAYER_HIT_SPACE = pygame.USEREVENT + 1
+PLAYER_HIT_SPACE = next_event_id()
 
 
 class Player(Hitbox):
@@ -27,10 +28,12 @@ class Player(Hitbox):
         em.register_event(self, pygame.KEYDOWN)
 
     def handle_event(self, event):
+        import shrimp_shanties.game.entity_manager as em
+
         match event.type:
             case pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
-                    print("sending event")
                     event = Event(PLAYER_HIT_SPACE, player_id=self.id)
                     pygame.event.post(event)
-                    pass
+            case em.PROCESS_TURN:
+                pass

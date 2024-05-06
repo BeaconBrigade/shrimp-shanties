@@ -1,6 +1,8 @@
 import pygame
 from pathlib import Path
 
+from shrimp_shanties.beat import Beat
+
 
 class AssetManager:
     ASSET_PATH = Path(__file__).parent / ".." / "assets"
@@ -55,3 +57,8 @@ class AssetManager:
     @staticmethod
     def load_theme(name: str):
         return AssetManager.ASSET_PATH / "themes" / name
+
+    @staticmethod
+    def load_shanty(name: str):
+        p = AssetManager.ASSET_PATH / "shanties" / name
+        return Beat(p)

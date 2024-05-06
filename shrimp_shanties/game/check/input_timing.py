@@ -1,10 +1,10 @@
+from shrimp_shanties.game.next_id import next_event_id
 from shrimp_shanties.game.player import Player, PLAYER_HIT_SPACE
 from shrimp_shanties.game.check import ActiveCheck
 from pygame.event import Event
-import pygame
 
 
-INPUT_TIMING = pygame.USEREVENT + 2
+INPUT_TIMING = next_event_id()
 
 
 class InputTiming(ActiveCheck):

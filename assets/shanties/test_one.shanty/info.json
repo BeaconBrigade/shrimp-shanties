@@ -1,0 +1,12 @@
+{
+  "name": "test_one",
+  "video_audio": "something.mp4",
+  "audio_name": "test_one.mp3",
+  "background": "bg.png",
+  "patterns": [
+    {
+      "name": "joe",
+      "beats_at": [0, 14, 44]
+    }
+  ]
+}

@@ -6,7 +6,7 @@ from shrimp_shanties.asset_manager import AssetManager
 WIDTH = 1000
 HEIGHT = 600
 
-from shrimp_shanties.front_page import FrontPage
+from shrimp_shanties.menu.front_page import FrontPage
 from shrimp_shanties.state import State
 
 

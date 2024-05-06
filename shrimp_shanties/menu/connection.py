@@ -25,6 +25,6 @@ class Connection(State):
     def handle_event(self, event):
         if event.type == pygame_gui.UI_BUTTON_PRESSED and event.ui_element == self.ui_elements[1]:
             # TODO: actually connect to other players
-            self.push(Game())
+            self.push(Game("test_one.shanty"))
         elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
             self.get_parent().pop()
