@@ -28,3 +28,5 @@ class Connection(State):
             self.push(Game("test_one.shanty"))
         elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
             self.get_parent().pop()
+        elif event.type == pygame.KEYDOWN:
+            self.push(Game("test_one.shanty"))
