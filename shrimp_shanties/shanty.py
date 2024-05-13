@@ -1,20 +1,26 @@
 import json
 import csv
 from dataclasses import dataclass
-from pathlib import Path
+
+from shrimp_shanties.asset_manager import AssetManager
+from shrimp_shanties.game.rhythm.note import Direction
 
 
 @dataclass
 class Pattern:
     start: int
     end: int
-    pattern: str
+    name: str
+
+    def __contains__(self, item: int):
+        return item in range(self.start, self.end)
 
 
-class Beat:
+class Shanty:
     """ The class for containing patterns about a beat and deciding when to emit a note """
 
-    def __init__(self, path: Path):
+    def __init__(self, path):
+        path = AssetManager.load_shanty(path)
         try:
             with open(path / 'info.json') as f:
                 info = json.load(f)
@@ -22,15 +28,46 @@ class Beat:
                 self.video_audio = info.get('video_audio')
                 self.audio_name = info.get('audio_name')
                 self.background = info.get('background')
-                self.patterns = info['patterns']
+                patterns = info['patterns']
+                self.patterns = dict()
+                for name, value in patterns.items():
+                    self.patterns[name] = dict()
+                    self.patterns[name]["len"] = value["len"]
+                    for k, v in list(value.items())[1:]:
+                        self.patterns[name][int(k)] = v
 
             with open(path / 'index.csv') as f:
-                self.patterns = []
+                self.index = []
                 r = csv.reader(f)
+                # skip headers
+                next(r)
                 for row in r:
-                    self.patterns.append(Pattern(int(row[0]), int(row[1]), row[2]))
+                    self.index.append(Pattern(int(row[0]), int(row[1]), row[2]))
         except Exception as e:
             raise BeatLoadError(e)
+
+    def note(self, beat):
+        # find which pattern we're in
+        for p in self.index:
+            if beat in p:
+                pat = p
+                break
+        else:
+            raise Exception("beat not in shanty")
+
+        # find offset into pattern
+        pat_info = self.patterns[pat.name]
+        offset = beat % pat_info["len"]
+
+        # return note from pattern
+        d = pat_info.get(offset)
+        if d is not None:
+            return Direction(int(d))
+        return None
+
+    def __str__(self):
+        return f"Shanty(name='{self.name}', va={self.video_audio}, an={self.audio_name}, b={self.background}, " + \
+            f"p={self.patterns}, index={self.index})"
 
 
 class BeatLoadError(Exception):

@@ -2,7 +2,8 @@ import pygame
 from pygame import Rect, Surface
 from pygame.event import Event
 
-from shrimp_shanties import WIDTH, HEIGHT, AssetManager
+from shrimp_shanties import WIDTH, HEIGHT
+from shrimp_shanties.asset_manager import AssetManager
 from shrimp_shanties.game.entity.hitbox import Hitbox
 from shrimp_shanties.game.next_id import next_event_id
 

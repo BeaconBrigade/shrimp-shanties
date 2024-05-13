@@ -3,10 +3,8 @@
   "video_audio": "something.mp4",
   "audio_name": "test_one.mp3",
   "background": "bg.png",
-  "patterns": [
+  "patterns":
     {
-      "name": "joe",
-      "beats_at": [0, 14, 44]
+      "joe": {"len": 180, "60": 0, "120": 2, "179": 3}
     }
-  ]
 }

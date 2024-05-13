@@ -21,10 +21,12 @@ background and the audio of the song
 - `audio_name` Location of the mp3 file which just contains audio
 - `background` Location of an mp4 or png which is the background
 for the song.
-- `patterns` Array, where each item has the following keys:
-  - `name` Name of the pattern
-  - `beats_at` Array of beat numbers where a note should be played
-    (relative to the first beat of the pattern is repeated)
+- `patterns` Object keyed by names of a pattern and values are objects keyed by:
+  - `len` is the length of the pattern in beats
+  - Beat numbers where a note should be played (relative to the
+  first beat of the pattern is repeated) mapping to the direction a
+  note should face (0, 1, 2, 3) = (up, right, down, left)
+    
 
 ## Properties of `index.csv`
 
