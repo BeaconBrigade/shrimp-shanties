@@ -1,5 +1,5 @@
 from shrimp_shanties.game.check import ActiveCheck, PassiveCheck
-from shrimp_shanties.game.entity import Entity
+from shrimp_shanties.game.entity import Entity, REMOVE_ENTITY
 from pygame.event import Event
 
 from shrimp_shanties.game.next_id import next_event_id
@@ -54,6 +54,8 @@ class EntityManager:
     def handle_event(self, event):
         if self.event_map.get(event.type) is not None or self.check_map.get(event.type) is not None:
             self.event_list.append(event)
+        elif event.type == REMOVE_ENTITY:
+            self.remove_entity(event.e_id)
 
     def draw(self, screen):
         for entity in self.entity_list:
@@ -66,7 +68,7 @@ class EntityManager:
     def remove_entity(self, search_id):
         for i, entity in enumerate(self.entity_list):
             if entity.id == search_id:
-                del self.entity_list[search_id]
+                del self.entity_list[i]
 
     def register_event(self, entity: Entity, type):
         """ Register for a particular entity to receives events of a certain type """
