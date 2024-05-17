@@ -26,6 +26,7 @@ class Note(Entity):
         self.height = Note.START_HEIGHT
         self.sprite = AssetManager.load_texture("up.png")
         self.sprite = pygame.transform.scale(self.sprite, (80, 80))
+        self.sprite = pygame.transform.rotate(self.sprite, -90 * self.direction.value)
         print(f"new note spawned with {self.direction}")
 
     def register_for_events(self, em):
@@ -36,6 +37,6 @@ class Note(Entity):
 
     def handle_event(self, event):
         if event.type == PROCESS_TURN:
-            self.height += 10
+            self.height += 5
             if self.height > Note.BOTTOM_HEIGHT:
                 self.remove()
