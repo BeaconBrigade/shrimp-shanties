@@ -1,5 +1,5 @@
-from pygame import Surface, Event
-from pygame.event import post
+from pygame import Surface
+from pygame.event import Event, post
 
 from shrimp_shanties.game.next_id import next_event_id
 
