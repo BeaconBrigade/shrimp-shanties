@@ -36,7 +36,7 @@ class EntityManager:
             if checks is None:
                 continue
             for check in checks:
-                e = check.check(self.event_list, event)
+                e = check.check(self.entity_list, event)
                 if e is not None:
                     self.event_list.append(e)
 
