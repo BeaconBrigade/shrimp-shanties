@@ -44,7 +44,7 @@ class Pause(State):
         elif event.type == pygame_gui.UI_BUTTON_PRESSED and event.ui_element == self.ui_elements[-2]:
             self.get_parent().pop()
         elif event.type == pygame_gui.UI_BUTTON_PRESSED and event.ui_element == self.ui_elements[-1]:
-            front = self.get_parent().get_parent().get_parent()
+            front = self.get_parent().get_parent()
             front.pop()
             front.pop()
             
