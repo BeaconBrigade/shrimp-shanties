@@ -31,6 +31,10 @@ class Game(State):
             self.em.handle_event(event)
 
     def update(self, delta):
-        self.em.generate_events(delta)
+        if self.child is None:
+            self.em.generate_events(delta)
+            print("test")
 
-        self.em.process_events()
+            self.em.process_events()
+        else:
+            self.child.update(delta)
