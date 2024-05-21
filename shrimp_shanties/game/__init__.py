@@ -33,7 +33,6 @@ class Game(State):
     def update(self, delta):
         if self.child is None:
             self.em.generate_events(delta)
-            print("test")
 
             self.em.process_events()
         else:
