@@ -3,7 +3,7 @@ import csv
 from dataclasses import dataclass
 
 from shrimp_shanties.asset_manager import AssetManager
-from shrimp_shanties.game.rhythm.note import Direction
+from shrimp_shanties.game.rhythm.note import Shrimp
 
 
 @dataclass
@@ -62,7 +62,7 @@ class Shanty:
         # return note from pattern
         d = pat_info.get(offset)
         if d is not None:
-            return Direction(int(d))
+            return Shrimp(int(d))
         return None
 
     def __str__(self):
