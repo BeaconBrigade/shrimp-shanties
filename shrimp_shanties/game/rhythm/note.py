@@ -16,10 +16,6 @@ class Shrimp(Enum):
     GREEN = 2
     BLUE = 3
 
-redI= 0
-yelI = 0
-greI = 0
-bluI = 0
 
 class Note(Hitbox):
     START_HEIGHT = 0
@@ -27,24 +23,13 @@ class Note(Hitbox):
 
     def __init__(self, note: Shrimp):
         super().__init__(next_entity_id())
-        global redI, yelI, greI, bluI
         self.note = note
         self.height = Note.START_HEIGHT
         self.x = 60 + 240 * self.note.value
         file_name = f"{note.name.lower()}shrimp.png"
         self.sprite = AssetManager.load_texture(file_name)
         self.sprite = pygame.transform.scale(self.sprite, (160, 160))
-        self.sprite = pygame.transform.rotate(self.sprite, -90 * random.randint(0,3))
-        if self.note == Shrimp.RED:
-            redI += 1
-        elif self.note == Shrimp.YELLOW:
-            yelI += 1
-        elif self.note == Shrimp.GREEN:
-            greI += 1
-        else:
-            bluI += 1
-        print('\033[2J\033[H',end='')
-        print(f"Red: {redI}, Yellow: {yelI}, Green: {greI}, Blue: {bluI}")
+        self.sprite = pygame.transform.rotate(self.sprite, -90 * random.randint(0, 3))
 
     def register_for_events(self, em):
         pass
