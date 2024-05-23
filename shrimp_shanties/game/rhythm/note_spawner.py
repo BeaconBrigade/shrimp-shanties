@@ -27,9 +27,7 @@ class NoteSpawner(Entity):
             if dir is not None:
                 self.count[dir.value] += 1
                 self.em.add_entity(Note(dir))
-            print('\033[2J\033[H', end='')
-            print(
-                f"Red: {self.count[Shrimp.RED.value]}, Yellow: {self.count[Shrimp.YELLOW.value]}," +
-                f"Green: {self.count[Shrimp.GREEN.value]}," +
-                f"Blue: {self.count[Shrimp.BLUE.value]}")
+                print('\033[2J\033[H', end='')
+                print(f"Red: {self.count[Shrimp.RED.value]}, Yellow: {self.count[Shrimp.YELLOW.value]}, "
+                    f"Green: {self.count[Shrimp.GREEN.value]}, Blue: {self.count[Shrimp.BLUE.value]}")
             self.beat += 1
