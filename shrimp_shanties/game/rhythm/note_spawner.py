@@ -14,7 +14,7 @@ class NoteSpawner(Entity):
         print(self.shanty)
         self.beat = 0
         self.em = None
-        self.count = [0, 0, 0, 0]
+        self.count = [0, 0, 0, 0, 0]
 
     def register_for_events(self, em):
         # this is very un-idiomatic
@@ -29,5 +29,5 @@ class NoteSpawner(Entity):
                 self.em.add_entity(Note(dir))
                 print('\033[2J\033[H', end='')
                 print(f"Red: {self.count[Shrimp.RED.value]}, Yellow: {self.count[Shrimp.YELLOW.value]}, "
-                    f"Green: {self.count[Shrimp.GREEN.value]}, Blue: {self.count[Shrimp.BLUE.value]}")
+                    f"Green: {self.count[Shrimp.GREEN.value]}, Blue: {self.count[Shrimp.BLUE.value]}, Hang: {self.count[Shrimp.HANG.value]}")
             self.beat += 1

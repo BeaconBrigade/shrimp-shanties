@@ -42,7 +42,10 @@ class Shanty:
                 # skip headers
                 next(r)
                 for row in r:
-                    self.index.append(Pattern(int(row[0]), int(row[1]), row[2]))
+                    try:
+                        self.index.append(Pattern(int(row[0]), int(row[1]), row[2]))
+                    except:
+                        pass
         except Exception as e:
             raise BeatLoadError(e)
 

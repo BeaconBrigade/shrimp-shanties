@@ -15,6 +15,7 @@ class Shrimp(Enum):
     YELLOW = 1
     GREEN = 2
     BLUE = 3
+    HANG = 4
 
 
 class Note(Hitbox):
