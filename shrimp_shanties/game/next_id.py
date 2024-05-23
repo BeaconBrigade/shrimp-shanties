@@ -2,7 +2,6 @@ import pygame
 
 START_ID = 100
 __entity_count = 0
-__event_count = 0
 
 
 def next_entity_id() -> int:
@@ -14,6 +13,4 @@ def next_entity_id() -> int:
 
 def next_event_id() -> int:
     """ Generate the next event id """
-    global __event_count
-    __event_count += 1
-    return pygame.USEREVENT + __event_count
+    return pygame.event.custom_type()

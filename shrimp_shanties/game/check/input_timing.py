@@ -32,6 +32,6 @@ class InputTiming(ActiveCheck):
         if nearest_item and self.player.intersects_with(nearest_item.dimensions()):
             nearest_item.remove()
             # Returns an event for increasing the score
-            print("Collision detected with item:", nearest_item.note)
-            return Event(INPUT_TIMING, success=True, score=1.0, id=self.player.id)
-        return Event(INPUT_TIMING, success=False, score=0.0, id=self.player.id)
+            print(f"collision detected from ({self.player.id}) with {nearest_item.note}")
+            return Event(INPUT_TIMING, success=True, score=1.0, player_id=self.player.id)
+        return Event(INPUT_TIMING, success=False, score=0.0, player_id=self.player.id)
