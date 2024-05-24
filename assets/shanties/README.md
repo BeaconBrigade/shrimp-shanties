@@ -33,6 +33,5 @@ for the song.
 Defines using beat ranges where each pattern is used. 
 
 Columns:
-- `start` The starting beat (inclusive)
-- `end` The ending beat (exclusive)
-- `pattern` The name of the pattern to be used over this range
+- `len` The length in beats this pattern should be used for
+- `pattern` The name of the pattern to be used

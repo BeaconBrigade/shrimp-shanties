@@ -1,40 +1,40 @@
-start,end,pattern
-0,120,stair
-120,180,estair
-180,360,bwstair
+len,pattern
+120,stair
+60,estair
+180,bwstair
 
-360,390,hbwstair
-390,420,hstair
-420,450,shstair
-450,480,shbwstair
+30,hbwstair
+30,hstair
+30,shstair
+30,shbwstair
 
-480,600,joe
-600,720,noa
+120,joe
+120,noa
 
-720,840,jan
+120,jan
 
-840,1200,hang
+360,hang
 
-1200,1230,hbwstair
-1230,1260,hstair
-1260,1290,shstair
-1290,1320,shbwstair
+30,hbwstair
+30,hstair
+30,shstair
+30,shbwstair
 
-1320,1440,bwstair
-1440,1500,estair
-1500,1620,stair
+120,bwstair
+60,estair
+120,stair
 
-1620,1740,joe
-1740,1860,jan
+120,joe
+120,jan
 
-1860,1920,ebwstair
-1920,2000,estair
+60,ebwstair
+80,estair
 
-1980,2100,bil
-2100,2400,mat
-2400,3000,joe
-3000,4200,jan
-4200,6600,bil
-6600,11400,jan
-11400,21000,joe
-21000,40000,mat
+120,bil
+300,mat
+600,joe
+1200,jan
+1400,bil
+4800,jan
+9600,joe
+19000,mat

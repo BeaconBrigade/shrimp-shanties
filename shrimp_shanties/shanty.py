@@ -8,12 +8,8 @@ from shrimp_shanties.game.rhythm.note import Shrimp
 
 @dataclass
 class Pattern:
-    start: int
-    end: int
+    length: int
     name: str
-
-    def __contains__(self, item: int):
-        return item in range(self.start, self.end)
 
 
 class Shanty:
@@ -40,10 +36,9 @@ class Shanty:
                 self.index = []
                 r = csv.reader(f)
                 # skip headers
-                next(r)
                 for row in r:
                     try:
-                        self.index.append(Pattern(int(row[0]), int(row[1]), row[2]))
+                        self.index.append(Pattern(int(row[0]), row[1]))
                     except:
                         pass
         except Exception as e:
@@ -51,10 +46,12 @@ class Shanty:
 
     def note(self, beat):
         # find which pattern we're in
+        num = 0
         for p in self.index:
-            if beat in p:
+            if beat in range(num, num + p.length):
                 pat = p
                 break
+            num += p.length
         else:
             raise Exception("beat not in shanty")
 
