@@ -15,7 +15,6 @@ class Shrimp(Enum):
     YELLOW = 1
     GREEN = 2
     BLUE = 3
-    HANG = 4
 
 
 class Note(Hitbox):
@@ -26,10 +25,10 @@ class Note(Hitbox):
         super().__init__(next_entity_id())
         self.note = note
         self.height = Note.START_HEIGHT
-        self.x = 60 + 240 * self.note.value
+        self.x = 60 + 250 * self.note.value #1000
         file_name = f"{note.name.lower()}shrimp.png"
         self.sprite = AssetManager.load_texture(file_name)
-        self.sprite = pygame.transform.scale(self.sprite, (160, 160))
+        self.sprite = pygame.transform.scale(self.sprite, (120, 120)) #480
         self.sprite = pygame.transform.rotate(self.sprite, -90 * random.randint(0, 3))
 
     def register_for_events(self, em):
