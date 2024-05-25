@@ -70,12 +70,10 @@ class EntityManager:
             if entity.id == search_id:
                 del self.entity_list[i]
 
-    def register_event(self, entity: Entity, type):
-        """ Register for a particular entity to receives events of a certain type """
-        if self.event_map.get(type) is not None:
-            self.event_map[type] += entity
-        else:
-            self.event_map[type] = [entity]
+    def register_event(self, entity, type):
+        if type not in self.event_map:
+            self.event_map[type] = []
+        self.event_map[type].append(entity)
 
     def unregister_event(self, entity: Entity, type):
         if self.event_map.get(type) is not None:

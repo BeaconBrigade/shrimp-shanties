@@ -18,30 +18,45 @@ class Shrimp(Enum):
 
 
 class Note(Hitbox):
-    START_HEIGHT = 0
-    BOTTOM_HEIGHT = 400
-
     def __init__(self, note: Shrimp):
         super().__init__(next_entity_id())
         self.note = note
-        self.height = Note.START_HEIGHT
-        self.x = 60 + 250 * self.note.value #1000
+        self.height_ratio = 0.0
+        self.x_ratio = (70 + 250 * self.note.value) / 1000
         file_name = f"{note.name.lower()}shrimp.png"
-        self.sprite = AssetManager.load_texture(file_name)
-        self.sprite = pygame.transform.scale(self.sprite, (120, 120)) #480
+        self.original_sprite = AssetManager.load_texture(file_name)
+        self.sprite = self.original_sprite
         self.sprite = pygame.transform.rotate(self.sprite, -90 * random.randint(0, 3))
+        self.height = 0
+        self.scale_sprite()  # Scales the sprite to window size when spawning.
 
     def register_for_events(self, em):
-        pass
+        em.register_event(self, pygame.VIDEORESIZE)
 
     def draw(self, screen: Surface):
-        screen.blit(self.sprite, Rect(self.x, self.height, 80, 80))
+        screen_width, screen_height = screen.get_size()
+        x = int(self.x_ratio * screen_width)
+        y = int(self.height_ratio * screen_height)
+        screen.blit(self.sprite, Rect(x, y, self.sprite.get_width(), self.sprite.get_height()))
 
     def handle_event(self, event):
         if event.type == PROCESS_TURN:
-            self.height += 5
-            if self.height > Note.BOTTOM_HEIGHT:
+            self.height_ratio += 0.01
+            if self.height_ratio > 0.8:
                 self.remove()
+        elif event.type == pygame.VIDEORESIZE:
+            self.scale_sprite()  # Scales the spawned sprites when the window is resized.
 
     def dimensions(self) -> Rect:
-        return Rect(self.x, self.height, 160, 160)
+        screen_width, screen_height = pygame.display.get_surface().get_size()
+        x = int(self.x_ratio * screen_width)
+        y = int(self.height_ratio * screen_height)
+        return Rect(x, y, self.sprite.get_width(), self.sprite.get_height())
+
+    def scale_sprite(self):
+        screen_width, screen_height = pygame.display.get_surface().get_size()
+        scale_factor = min(screen_width*4 / 1000, screen_height*4 / 600)
+        new_width = int(self.original_sprite.get_width() * scale_factor)
+        new_height = int(self.original_sprite.get_height() * scale_factor)
+        self.sprite = pygame.transform.scale(self.original_sprite, (new_width, new_height))
+
