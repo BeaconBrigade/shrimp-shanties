@@ -6,9 +6,7 @@ from shrimp_shanties.asset_manager import AssetManager
 from shrimp_shanties.game.entity.hitbox import Hitbox
 from shrimp_shanties.game.next_id import next_event_id
 
-
-PLAYER_HIT_SPACE = next_event_id()
-
+INPUT_TIMING = next_event_id()
 
 class Player(Hitbox):
     def __init__(self, id=0):
@@ -45,14 +43,18 @@ class Player(Hitbox):
         em.register_event(self, pygame.VIDEORESIZE)
 
     def handle_event(self, event):
-        import shrimp_shanties.game.entity_manager as em
-
-        match event.type:
-            case pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE:
-                    event = Event(PLAYER_HIT_SPACE, player_id=self.id)
-                    pygame.event.post(event)
-            case pygame.VIDEORESIZE:
-                self.scale_hitbox()  # Updates the hitbox when the window is resized.
-            case em.PROCESS_TURN:
-                pass
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_a:  # Red Shrimp Note
+                shrimp_event = Event(INPUT_TIMING, player_id=self.id, shrimp="RED")
+                pygame.event.post(shrimp_event)
+            elif event.key == pygame.K_s:  # Yellow Shrimp Note
+                shrimp_event = Event(INPUT_TIMING, player_id=self.id, shrimp="YELLOW")
+                pygame.event.post(shrimp_event)
+            elif event.key == pygame.K_d:  # Green Shrimp Note
+                shrimp_event = Event(INPUT_TIMING, player_id=self.id, shrimp="GREEN")
+                pygame.event.post(shrimp_event)
+            elif event.key == pygame.K_f:  # Blue Shrimp Note
+                shrimp_event = Event(INPUT_TIMING, player_id=self.id, shrimp="BLUE")
+                pygame.event.post(shrimp_event)
+        elif event.type == pygame.VIDEORESIZE:
+            self.scale_hitbox()  # Updates the hitbox when the window is resized.
