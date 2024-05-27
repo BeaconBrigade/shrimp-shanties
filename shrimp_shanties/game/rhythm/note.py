@@ -28,6 +28,7 @@ class Note(Hitbox):
         self.sprite = self.original_sprite
         self.sprite = pygame.transform.rotate(self.sprite, -90 * random.randint(0, 3))
         self.height = 0
+        self.disabled = False
         self.scale_sprite()  # Scales the sprite to window size when spawning.
 
     def register_for_events(self, em):
@@ -37,12 +38,20 @@ class Note(Hitbox):
         screen_width, screen_height = screen.get_size()
         x = int(self.x_ratio * screen_width)
         y = int(self.height_ratio * screen_height)
-        screen.blit(self.sprite, Rect(x, y, self.sprite.get_width(), self.sprite.get_height()))
+
+        sprite = self.sprite.copy()
+        if self.disabled:
+            coloured = pygame.Surface(self.sprite.get_size()).convert_alpha()
+            coloured.fill((100, 100, 100))
+            sprite.blit(coloured, (0, 0), special_flags=pygame.BLEND_RGBA_MULT)
+        screen.blit(sprite, Rect(x, y, sprite.get_width(), sprite.get_height()))
 
     def handle_event(self, event):
         if event.type == PROCESS_TURN:
             self.height_ratio += 0.01
-            if self.height_ratio > 0.8:
+            if self.height_ratio > 0.66666:
+                self.disabled = True
+            if self.height_ratio > 1.0:
                 self.remove()
         elif event.type == pygame.VIDEORESIZE:
             self.scale_sprite()  # Scales the spawned sprites when the window is resized.

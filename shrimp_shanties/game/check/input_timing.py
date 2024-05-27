@@ -23,7 +23,7 @@ class InputTiming(ActiveCheck):
         nearest_item = None
         min_distance = float('inf')
         for entity in entity_list:
-            if isinstance(entity, Note):
+            if isinstance(entity, Note) and not entity.disabled:
                 distance = abs(self.player.pos.y - entity.height)
                 if distance < min_distance:
                     min_distance = distance
@@ -34,4 +34,6 @@ class InputTiming(ActiveCheck):
             # Returns an event for increasing the score
             print(f"collision detected from ({self.player.id}) with {nearest_item.note}")
             return Event(INPUT_TIMING, success=True, score=1.0, player_id=self.player.id)
+        if nearest_item is not None:
+            nearest_item.disabled = True
         return Event(INPUT_TIMING, success=False, score=0.0, player_id=self.player.id)

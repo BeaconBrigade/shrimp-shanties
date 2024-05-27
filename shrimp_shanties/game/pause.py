@@ -3,7 +3,6 @@ import pygame_gui
 from pygame import Surface
 from pygame_gui.elements import UIPanel, UILabel, UIButton
 
-from .. import HEIGHT, WIDTH
 from ..state import State
 
 
@@ -32,23 +31,19 @@ class Pause(State):
         )
 
     def draw(self, screen: Surface):
-        # Get the current window dimensions
-        window_width, window_height = screen.get_size()
-        
-        # Create a shaded surface the same size as the window
-        shaded_surface = pygame.Surface((window_width, window_height), pygame.SRCALPHA)
-        
-        # Draw the parent state onto a temporary surface
-        parent_surface = pygame.Surface((window_width, window_height))
+        # draw the parent state
+        parent_surface = pygame.Surface(screen.get_size())
+        parent_surface.set_alpha(255)
         self.get_parent().draw(parent_surface)
 
-        # Create a shaded copy of the parent surface 
-        shaded_surface = parent_surface.copy()
-        shaded = pygame.Color((255, 255, 255)).lerp((0, 0, 0), 0.5)
-        shaded_surface.fill(shaded, special_flags=pygame.BLEND_RGBA_MULT)
+        # create a shaded copy of the parent surface
+        shaded_surface = pygame.Surface(screen.get_size())
+        shaded_surface.fill((100, 100, 100))
+        shaded_surface.set_alpha(170)
+        parent_surface.blit(shaded_surface, (0, 0))
 
         # Blit the shaded surface onto the main screen 
-        screen.blit(shaded_surface, (0, 0))
+        screen.blit(parent_surface, (0, 0))
 
     def handle_event(self, event):
         if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
