@@ -20,13 +20,13 @@ class Player(Hitbox):
 
         # Calculates the scaled dimensions for the hitbox.
         hitbox_width = window_width
-        hitbox_height = window_height * 0.33333
+        hitbox_height = window_height * 0.4
         hitbox_left = 0
-        hitbox_top = window_height * 0.66666
+        hitbox_top = window_height * 0.6
 
         # Updates the hitbox position and size.
         self.sprite_dims = Rect(hitbox_left, hitbox_top, hitbox_width, hitbox_height)
-        self.pos = Rect(0., window_height * 0.66666, window_width, 20)
+        self.pos = Rect(0., window_height * 0.6, window_width, 10)
 
         # Scales the sprite to match the dimensions.
         self.sprite = pygame.transform.scale(self.sprite, (hitbox_width, hitbox_height))

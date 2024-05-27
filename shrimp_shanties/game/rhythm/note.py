@@ -40,17 +40,28 @@ class Note(Hitbox):
         y = int(self.height_ratio * screen_height)
 
         sprite = self.sprite.copy()
-        if self.disabled:
-            coloured = pygame.Surface(self.sprite.get_size()).convert_alpha()
-            coloured.fill((100, 100, 100))
-            sprite.blit(coloured, (0, 0), special_flags=pygame.BLEND_RGBA_MULT)
+        if self.disabled == True:
+            overlay_color = pygame.Color(0, 0, 0).lerp((255, 0, 0), 0.9)
+            width, height = self.sprite.get_size()
+            scale_factor = 1
+            new_width = width / scale_factor
+            new_height = height / scale_factor
+            scaled_size = (new_width, new_height)
+            coloured = pygame.Surface(scaled_size, pygame.SRCALPHA)
+            coloured.fill(overlay_color)
+            sprite.blit(coloured, (0, 0), special_flags=pygame.BLEND_RGBA_ADD)
+        elif self.disabled == "Sunk":
+            overlay_color = pygame.Color(0, 0, 0).lerp((3, 68, 171), 1)
+            coloured = pygame.Surface(self.sprite.get_size(), pygame.SRCALPHA)
+            coloured.fill(overlay_color)
+            sprite.blit(coloured, (0, 0), special_flags=pygame.BLEND_RGBA_ADD)
         screen.blit(sprite, Rect(x, y, sprite.get_width(), sprite.get_height()))
 
     def handle_event(self, event):
         if event.type == PROCESS_TURN:
             self.height_ratio += 0.01
-            if self.height_ratio > 0.66666:
-                self.disabled = True
+            if self.height_ratio > 0.62:
+                self.disabled = "Sunk"
             if self.height_ratio > 1.0:
                 self.remove()
         elif event.type == pygame.VIDEORESIZE:

@@ -38,8 +38,8 @@ class Pause(State):
 
         # create a shaded copy of the parent surface
         shaded_surface = pygame.Surface(screen.get_size())
-        shaded_surface.fill((100, 100, 100))
-        shaded_surface.set_alpha(170)
+        shaded_surface.fill((0, 0, 0))
+        shaded_surface.set_alpha(128)
         parent_surface.blit(shaded_surface, (0, 0))
 
         # Blit the shaded surface onto the main screen 
