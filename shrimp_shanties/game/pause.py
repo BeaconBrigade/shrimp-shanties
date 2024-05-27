@@ -37,16 +37,14 @@ class Pause(State):
         
         # Create a shaded surface the same size as the window
         shaded_surface = pygame.Surface((window_width, window_height), pygame.SRCALPHA)
-        shaded = pygame.Color((0, 255, 0)).lerp((32, 20, 46), 0.5)
-        shaded_surface.fill(shaded)
         
         # Draw the parent state onto a temporary surface
         parent_surface = pygame.Surface((window_width, window_height))
         self.get_parent().draw(parent_surface)
 
-        # Create a shaded copy of the parent surface  
+        # Create a shaded copy of the parent surface 
         shaded_surface = parent_surface.copy()
-        shaded = pygame.Color((255, 255, 255)).lerp((10, 5, 10), 0.2)
+        shaded = pygame.Color((255, 255, 255)).lerp((0, 0, 0), 0.5)
         shaded_surface.fill(shaded, special_flags=pygame.BLEND_RGBA_MULT)
 
         # Blit the shaded surface onto the main screen 
