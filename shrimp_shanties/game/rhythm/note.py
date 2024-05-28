@@ -3,6 +3,7 @@ from enum import Enum
 import pygame
 import random
 from pygame import Surface, Rect
+from pygame.event import post, Event
 
 from shrimp_shanties.game.entity.hitbox import Hitbox
 from shrimp_shanties import AssetManager
@@ -29,6 +30,7 @@ class Note(Hitbox):
         self.sprite = pygame.transform.rotate(self.sprite, -90 * random.randint(0, 3))
         self.height = 0
         self.disabled = False
+        self.is_sunk = False
         self.scale_sprite()  # Scales the sprite to window size when spawning.
 
     def register_for_events(self, em):
@@ -60,7 +62,11 @@ class Note(Hitbox):
     def handle_event(self, event):
         if event.type == PROCESS_TURN:
             self.height_ratio += 0.01
-            if self.height_ratio > 0.62:
+            if self.height_ratio > 0.62 and not self.is_sunk:
+                self.is_sunk = True
+                if not self.disabled:
+                    from shrimp_shanties.game.check.input_timing import INPUT_TIMING
+                    post(Event(INPUT_TIMING, success=False))
                 self.disabled = "Sunk"
             if self.height_ratio > 1.0:
                 self.remove()

@@ -25,25 +25,27 @@ class InputTiming(ActiveCheck):
             pygame.K_j: Shrimp.GREEN,
             pygame.K_k: Shrimp.BLUE
         }
+        if event.key not in shrimp_key_mapping:
+            return None
 
-        if event.key in shrimp_key_mapping:
-            shrimp = shrimp_key_mapping[event.key]
-            nearest_item = None
-            min_distance = float('inf')
-            for entity in entity_list:
-                if isinstance(entity, Note) and not entity.disabled and entity.note == shrimp:
-                    distance = abs(self.player.pos.y - entity.height)
-                    if distance < min_distance:
-                        min_distance = distance
-                        nearest_item = entity
-            # Performs a collision check
-            if nearest_item and self.player.intersects_with(nearest_item.dimensions()):
-                nearest_item.remove()
-                # Returns an event for increasing the score
-                print(f"Collision detected with {nearest_item.note.name} shrimp!")
-                return Event(INPUT_TIMING, success=True, score=1.0, player_id=self.player.id)
+        shrimp = shrimp_key_mapping[event.key]
+        nearest_item = None
+        min_distance = float('inf')
+        for entity in entity_list:
+            if isinstance(entity, Note) and not entity.disabled and entity.note == shrimp:
+                distance = abs(self.player.pos.y - entity.height)
+                if distance < min_distance:
+                    min_distance = distance
+                    nearest_item = entity
+        # Performs a collision check
+        if nearest_item and self.player.intersects_with(nearest_item.dimensions()):
+            nearest_item.remove()
+            # Returns an event for increasing the score
+            print(f"Collision detected with {nearest_item.note.name} shrimp!")
+            return Event(INPUT_TIMING, success=True, score=1.0, player_id=self.player.id)
 
-            if nearest_item is not None:
-                nearest_item.disabled = True
+        if nearest_item is not None:
+            nearest_item.disabled = True
+            return Event(INPUT_TIMING, success=False, score=1.0, player_id=self.player.id)
 
         return None

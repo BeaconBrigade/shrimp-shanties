@@ -13,7 +13,7 @@ class Score(Entity):
         super().__init__(id=next_entity_id())
         self.scores = [0] * player_count
         self.misses = 0  # Initialize misses count
-        self.base_font_size = 32
+        self.base_font_size = 32 
         self.font = None
 
     def draw(self, screen: Surface):
@@ -44,9 +44,9 @@ class Score(Entity):
         em.register_event(self, INPUT_TIMING)
 
     def handle_event(self, event):
-        if event.type == INPUT_TIMING:
+        if event.type == INPUT_TIMING and event.success:
             self.scores[event.player_id] += int(event.score * 1000)
-        #elif self.disabled == True or "Sunk":
-            #self.misses += 1 # TODO misses count
+        elif event.type == INPUT_TIMING and not event.success:
+            self.misses += 1
         elif event.type == PROCESS_TURN:
             pass
