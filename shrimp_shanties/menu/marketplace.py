@@ -5,23 +5,16 @@ from pygame_gui.elements import UILabel, UIButton
 
 from shrimp_shanties.state import State
 from shrimp_shanties.game import Game
-from shrimp_shanties.menu.marketplace import Marketplace
 
-
-class Connection(State):
+class Marketplace(State):
     def __init__(self):
         super().__init__()
-
         self.ui_elements.append(UILabel(relative_rect=pygame.Rect((0, 20), (-1, -1)), object_id="@subheading",
-                                        text="Connect with other players", anchors={'centerx': 'centerx', 'top': 'top'},
+                                        text="Marketplace Test", anchors={'centerx': 'centerx', 'top': 'top'},
                                         manager=State.MANAGER))
 
         self.ui_elements.append(
-            UIButton(relative_rect=pygame.Rect((0, 0), (-1, -1)), object_id="#start-game", text="Connect",
-                     anchors={'center': 'center'}, manager=State.MANAGER))
-        
-        self.ui_elements.append(
-            UIButton(relative_rect=pygame.Rect((0, 50), (-1, -1)), object_id="#start-shop", text="Marketplace",
+            UIButton(relative_rect=pygame.Rect((0, 0), (-1, -1)), object_id="#return", text="Back",
                      anchors={'center': 'center'}, manager=State.MANAGER))
 
     def draw(self, screen: Surface):
@@ -29,14 +22,10 @@ class Connection(State):
 
     def handle_event(self, event):
         if event.type == pygame_gui.UI_BUTTON_PRESSED and event.ui_element == self.ui_elements[1]:
-            # TODO: actually connect to other players
             pygame.event.clear()
-            self.push(Game("test_one.shanty"))
-        elif event.type == pygame_gui.UI_BUTTON_PRESSED and event.ui_element == self.ui_elements[2]:
-            pygame.event.clear()
-            self.push(Marketplace())
+            self.get_parent().pop()
         elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
             self.get_parent().pop()
         elif event.type == pygame.KEYDOWN:
             pygame.event.clear()
-            self.push(Game("test_one.shanty"))
+            self.get_parent().pop()
