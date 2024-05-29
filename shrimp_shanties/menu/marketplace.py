@@ -18,9 +18,9 @@ class Marketplace(State):
                                         text="Marketplace Test", anchors={'centerx': 'centerx', 'top': 'top'},
                                         manager=State.MANAGER))
 
-        self.ui_elements.append(
-            UIButton(relative_rect=pygame.Rect((0, 50), (-1, -1)), object_id="#return", text="Back",
-                     anchors={'centerx': 'centerx', 'top': 'top'}, manager=State.MANAGER))
+        self.ui_elements.append(UIButton(relative_rect=pygame.Rect((0, 50), (-1, -1)), object_id="#return", 
+                                        text="Back", anchors={'centerx': 'centerx', 'top': 'top'},
+                                        manager=State.MANAGER))
 
     def load_image_assets(self):
         image_files = AssetManager.list_cosmetics()
@@ -55,11 +55,9 @@ class Marketplace(State):
         screen.fill((30, 30, 50))
 
     def handle_event(self, event):
-        if event.type == pygame_gui.UI_BUTTON_PRESSED and event.ui_element == self.ui_elements[1]:
-            pygame.event.clear()
+        if event.type == pygame_gui.UI_BUTTON_PRESSED and event.ui_element == self.ui_elements[-1]:
             self.get_parent().pop()
         elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
             self.get_parent().pop()
         elif event.type == pygame.KEYDOWN:
-            pygame.event.clear()
             self.get_parent().pop()
