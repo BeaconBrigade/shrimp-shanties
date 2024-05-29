@@ -1,5 +1,6 @@
 import pygame
 from pathlib import Path
+import os
 
 
 class AssetManager:
@@ -59,3 +60,17 @@ class AssetManager:
     @staticmethod
     def load_shanty(name: str):
         return AssetManager.ASSET_PATH / "shanties" / name
+
+    @staticmethod
+    def load_cosmetic(name: str):
+        hash_name = f'cosmetics/{name}'
+        if hash_name in AssetManager.cache:
+            return AssetManager.cache[hash_name]
+        asset = pygame.image.load(AssetManager.ASSET_PATH / "textures/cosmetics" / name)
+        AssetManager.cache[hash_name] = asset
+        return asset
+
+    @staticmethod
+    def list_cosmetics():
+        image_files = [f for f in os.listdir(AssetManager.ASSET_PATH / "textures/cosmetics") if f.endswith(".png")]
+        return image_files

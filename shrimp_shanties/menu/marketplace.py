@@ -5,6 +5,7 @@ from pygame_gui.elements import UILabel, UIButton, UIPanel, UIImage
 
 from shrimp_shanties.state import State
 from shrimp_shanties.game import Game
+from shrimp_shanties.asset_manager import AssetManager
 
 import os
 from pathlib import Path
@@ -22,13 +23,11 @@ class Marketplace(State):
                      anchors={'centerx': 'centerx', 'top': 'top'}, manager=State.MANAGER))
 
     def load_image_assets(self):
-        textures_folder = Path(__file__).parent.parent.parent / 'assets/textures/cosmetics'
-        image_files = [f for f in os.listdir(textures_folder) if f.endswith(".png")]
+        image_files = AssetManager.list_cosmetics()
 
         self.image_assets = []
         for image_file in image_files:
-            image_path = os.path.join(textures_folder, image_file)
-            image = pygame.image.load(image_path).convert_alpha()
+            image = AssetManager.load_cosmetic(image_file)
             self.image_assets.append(image)
 
         self.create_image_panels()
