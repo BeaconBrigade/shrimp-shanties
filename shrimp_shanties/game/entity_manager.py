@@ -25,8 +25,8 @@ class EntityManager:
             if e is not None:
                 self.event_list.append(e)
 
-    def process_events(self):
-        self.event_list.append(Event(PROCESS_TURN))
+    def process_events(self, delta):
+        self.event_list.append(Event(PROCESS_TURN, delta=delta))
         for event in self.event_list:
             entities = self.event_map.get(event.type)
             if entities is not None:

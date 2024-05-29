@@ -34,6 +34,6 @@ class Game(State):
         if self.child is None:
             self.em.generate_events(delta)
 
-            self.em.process_events()
+            self.em.process_events(delta)
         else:
             self.child.update(delta)

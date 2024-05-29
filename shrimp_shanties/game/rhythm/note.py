@@ -65,7 +65,8 @@ class Note(Hitbox):
 
     def handle_event(self, event):
         if event.type == PROCESS_TURN:
-            self.height_ratio += 0.01
+            # multiply speed by delta in seconds to run at 60 fps
+            self.height_ratio += 0.01 * event.delta * 60
             if self.height_ratio > 0.62 and not self.is_sunk:
                 self.is_sunk = True
                 if not self.disabled:
