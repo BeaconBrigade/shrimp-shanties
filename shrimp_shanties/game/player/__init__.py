@@ -2,17 +2,16 @@ import pygame
 from pygame import Rect, Surface
 from pygame.event import Event
 
-from shrimp_shanties.asset_manager import AssetManager
 from shrimp_shanties.game.entity.hitbox import Hitbox
 from shrimp_shanties.game.next_id import next_event_id
 from shrimp_shanties.game.rhythm.note import Shrimp
 
 INPUT_TIMING = next_event_id()
 
+
 class Player(Hitbox):
     def __init__(self, id=0):
         super().__init__(id)
-        self.sprite = AssetManager.load_texture("front-background.png")
         self.scale_hitbox()
 
     def scale_hitbox(self):
@@ -29,15 +28,12 @@ class Player(Hitbox):
         self.sprite_dims = Rect(hitbox_left, hitbox_top, hitbox_width, hitbox_height)
         self.pos = Rect(0., window_height * 0.6, window_width, 10)
 
-        # Scales the sprite to match the dimensions.
-        self.sprite = pygame.transform.scale(self.sprite, (hitbox_width, hitbox_height))
-
     def dimensions(self) -> Rect:
         return self.pos
 
     def draw(self, screen: Surface):
-        screen.blit(self.sprite, self.sprite_dims)
         pygame.draw.rect(screen, (255, 255, 255), self.pos)
+        pygame.draw.rect(screen, (3, 68, 171), Rect(self.pos.left, self.pos.bottom, self.pos.width, 400))
 
     def register_for_events(self, em):
         em.register_event(self, pygame.KEYDOWN)
