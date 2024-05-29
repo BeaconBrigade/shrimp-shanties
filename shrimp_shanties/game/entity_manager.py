@@ -26,6 +26,7 @@ class EntityManager:
                 self.event_list.append(e)
 
     def process_events(self):
+        self.event_list.append(Event(PROCESS_TURN))
         for event in self.event_list:
             entities = self.event_map.get(event.type)
             if entities is not None:
@@ -39,15 +40,6 @@ class EntityManager:
                 e = check.check(self.entity_list, event)
                 if e is not None:
                     self.event_list.append(e)
-
-        # I know this is inefficient to run through almost every entity twice,
-        # but whatever.
-        # The purpose of the 'PROCESS_TURN' event is to replace having to make a
-        # separate 'update' function on the entity class since they already have
-        # a method for handling updates
-        next_turn = Event(PROCESS_TURN)
-        for entity in self.entity_list:
-            entity.handle_event(next_turn)
 
         self.event_list.clear()
 
@@ -63,6 +55,7 @@ class EntityManager:
 
     def add_entity(self, entity: Entity):
         entity.register_for_events(self)
+        self.register_event(entity, PROCESS_TURN)
         self.entity_list.append(entity)
 
     def remove_entity(self, search_id):
