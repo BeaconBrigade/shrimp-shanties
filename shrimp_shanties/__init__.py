@@ -29,6 +29,9 @@ def main():
     running = True
     while running:
         delta = clock.tick(60)/1000.
+        fps = 1 / delta
+        #print('\033[2J\033[H', end='')
+        print(f'{fps:2} fps ({delta})')
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
