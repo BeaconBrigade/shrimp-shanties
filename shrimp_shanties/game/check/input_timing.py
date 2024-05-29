@@ -32,7 +32,7 @@ class InputTiming(ActiveCheck):
         nearest_item = None
         min_distance = float('inf')
         for entity in entity_list:
-            if isinstance(entity, Note) and not entity.disabled and entity.note == shrimp:
+            if isinstance(entity, Note) and not entity.disabled and entity.note == shrimp and not entity.is_sunk:
                 distance = abs(self.player.pos.y - entity.height)
                 if distance < min_distance:
                     min_distance = distance
@@ -44,7 +44,7 @@ class InputTiming(ActiveCheck):
             print(f"Collision detected with {nearest_item.note.name} shrimp!")
             return Event(INPUT_TIMING, success=True, score=1.0, player_id=self.player.id)
 
-        if nearest_item is not None:
+        if nearest_item is not None and not nearest_item.is_sunk:
             nearest_item.disabled = True
             return Event(INPUT_TIMING, success=False, score=1.0, player_id=self.player.id)
 

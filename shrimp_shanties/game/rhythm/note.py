@@ -40,10 +40,9 @@ class Note(Hitbox):
         screen_width, screen_height = screen.get_size()
         x = int(self.x_ratio * screen_width)
         y = int(self.height_ratio * screen_height)
-
-        sprite = self.sprite.copy()
-        if self.disabled == True:
-            overlay_color = pygame.Color(0, 0, 0).lerp((255, 0, 0), 0.9)
+        sprite=self.sprite.copy()
+        if self.disabled:
+            overlay_color = pygame.Color(0, 0, 0).lerp((255, 255, 255), 0.625)
             width, height = self.sprite.get_size()
             scale_factor = 1
             new_width = width / scale_factor
@@ -51,10 +50,15 @@ class Note(Hitbox):
             scaled_size = (new_width, new_height)
             coloured = pygame.Surface(scaled_size, pygame.SRCALPHA)
             coloured.fill(overlay_color)
+            sprite.blit(coloured, (0, 0), special_flags=pygame.BLEND_RGBA_MULT)
+        if self.is_sunk and self.disabled:
+            overlay_color = pygame.Color(255, 255, 255).lerp((3, 68, 171), 1)
+            coloured = pygame.Surface(sprite.get_size(), pygame.SRCALPHA)
+            coloured.fill(overlay_color)
             sprite.blit(coloured, (0, 0), special_flags=pygame.BLEND_RGBA_ADD)
-        elif self.disabled == "Sunk":
+        elif self.is_sunk:
             overlay_color = pygame.Color(0, 0, 0).lerp((3, 68, 171), 1)
-            coloured = pygame.Surface(self.sprite.get_size(), pygame.SRCALPHA)
+            coloured = pygame.Surface(sprite.get_size(), pygame.SRCALPHA)
             coloured.fill(overlay_color)
             sprite.blit(coloured, (0, 0), special_flags=pygame.BLEND_RGBA_ADD)
         screen.blit(sprite, Rect(x, y, sprite.get_width(), sprite.get_height()))
@@ -67,7 +71,6 @@ class Note(Hitbox):
                 if not self.disabled:
                     from shrimp_shanties.game.check.input_timing import INPUT_TIMING
                     post(Event(INPUT_TIMING, success=False))
-                self.disabled = "Sunk"
             if self.height_ratio > 1.0:
                 self.remove()
         elif event.type == pygame.VIDEORESIZE:
