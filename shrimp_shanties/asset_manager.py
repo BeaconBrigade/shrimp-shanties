@@ -62,6 +62,10 @@ class AssetManager:
         return AssetManager.ASSET_PATH / "shanties" / name
 
     @staticmethod
+    def list_shanties():
+        return [f for f in os.listdir(AssetManager.ASSET_PATH / "shanties") if f.endswith(".shanty")]
+
+    @staticmethod
     def load_cosmetic(name: str):
         hash_name = f'cosmetics/{name}'
         if hash_name in AssetManager.cache:

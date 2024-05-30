@@ -63,6 +63,42 @@
       "shape_corner_radius": "12"
     }
   },
+  "#select-theme": {
+    "prototype": "#fira-sans-bold",
+    "colours": {
+      "normal_bg": "hsl(180, 50%, 20%)",
+      "dark_bg": "hsl(180, 50%, 20%)",
+      "normal_text": "hsl(240, 0%, 100%)",
+      "hovered_bg": "hsl(180, 50%, 25%)",
+      "hovered_text": "hsl(240, 0%, 100%)",
+      "active_bg": "hsl(60, 80%, 20%)",
+      "active_text": "hsl(60, 80%, 50%)",
+      "normal_border": "hsl(122, 11%, 40%)"
+    },
+    "font": {
+      "size": "25"
+    },
+    "misc": {
+      "shape": "rounded_rectangle",
+      "shape_corner_radius": "12"
+    }
+  },
+  "drop_down_menu.button": {
+    "prototype": "#fira-sans-bold",
+    "colours": {
+      "normal_bg": "hsl(180, 50%, 20%)",
+      "active_bg": "hsl(60, 80%, 20%)",
+      "hovered_bg": "hsl(180, 50%, 25%)",
+      "hovered_text": "hsl(240, 0%, 100%)"
+    },
+    "misc": {
+      "shape": "rounded_rectangle",
+      "shape_corner_radius": "12"
+    },
+    "font": {
+      "size": "20"
+    }
+  },
   "#return": {
     "prototype": "#fira-sans-bold",
     "colours": {

@@ -35,6 +35,8 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+            elif event.type == pygame.KEYDOWN and event.key == pygame.K_EQUALS:
+                manager.set_visual_debug_mode(not manager.visual_debug_active)
             elif event.type == pygame.VIDEORESIZE:
                 WIDTH = event.w
                 HEIGHT = event.h
