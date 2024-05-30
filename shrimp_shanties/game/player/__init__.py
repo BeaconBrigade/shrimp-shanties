@@ -36,22 +36,8 @@ class Player(Hitbox):
         pygame.draw.rect(screen, (3, 68, 171), Rect(self.pos.left, self.pos.bottom, self.pos.width, 400))
 
     def register_for_events(self, em):
-        em.register_event(self, pygame.KEYDOWN)
         em.register_event(self, pygame.VIDEORESIZE)
 
     def handle_event(self, event):
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_a:  # Red Shrimp Note
-                shrimp_event = Event(INPUT_TIMING, player_id=self.id, shrimp=Shrimp.RED)
-                pygame.event.post(shrimp_event)
-            elif event.key == pygame.K_s:  # Yellow Shrimp Note
-                shrimp_event = Event(INPUT_TIMING, player_id=self.id, shrimp=Shrimp.YELLOW)
-                pygame.event.post(shrimp_event)
-            elif event.key == pygame.K_d:  # Green Shrimp Note
-                shrimp_event = Event(INPUT_TIMING, player_id=self.id, shrimp=Shrimp.GREEN)
-                pygame.event.post(shrimp_event)
-            elif event.key == pygame.K_f:  # Blue Shrimp Note
-                shrimp_event = Event(INPUT_TIMING, player_id=self.id, shrimp=Shrimp.BLUE)
-                pygame.event.post(shrimp_event)
-        elif event.type == pygame.VIDEORESIZE:
+        if event.type == pygame.VIDEORESIZE:
             self.scale_hitbox()  # Updates the hitbox when the window is resized.

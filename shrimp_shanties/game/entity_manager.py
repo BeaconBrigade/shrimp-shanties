@@ -62,6 +62,11 @@ class EntityManager:
         for i, entity in enumerate(self.entity_list):
             if entity.id == search_id:
                 del self.entity_list[i]
+                break
+        for ll in self.event_map.values():
+            for i, entity in enumerate(ll):
+                if entity.id == search_id:
+                    del ll[i]
 
     def register_event(self, entity, type):
         if type not in self.event_map:

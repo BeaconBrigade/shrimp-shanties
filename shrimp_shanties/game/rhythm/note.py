@@ -90,3 +90,6 @@ class Note(Hitbox):
         new_height = int(self.original_sprite.get_height() * scale_factor)
         self.sprite = pygame.transform.scale(self.original_sprite, (new_width, new_height))
 
+    def __str__(self):
+        return f"Note(dir={self.note} disabled={self.disabled} sunk={self.is_sunk})"
+

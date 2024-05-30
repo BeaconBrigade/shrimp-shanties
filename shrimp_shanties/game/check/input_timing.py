@@ -8,6 +8,7 @@ from shrimp_shanties.game.rhythm.note import Note, Shrimp
 
 INPUT_TIMING = next_event_id()
 
+
 class InputTiming(ActiveCheck):
     def __init__(self, em):
         super().__init__(em)
