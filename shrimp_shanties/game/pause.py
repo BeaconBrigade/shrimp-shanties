@@ -3,6 +3,8 @@ import pygame_gui
 from pygame import Surface
 from pygame_gui.elements import UIPanel, UILabel, UIButton
 
+from ..menu.marketplace import Marketplace
+
 from ..state import State
 
 
@@ -16,18 +18,23 @@ class Pause(State):
 
         self.ui_elements.append(
             UILabel(relative_rect=pygame.Rect((0, 20), (-1, -1)), container=panel,
-                    anchors={'centerx': 'centerx', 'top': 'top'}, text='Pause', object_id='@subheading',
+                    anchors={'centerx': 'centerx', 'top': 'top'}, text='Pause Menu', object_id='@subheading',
                     manager=State.MANAGER)
         )
 
+        self.marketplace_button = UIButton(relative_rect=pygame.Rect((0, -100), (-1, -1)), container=panel,
+                                   anchors={'center': 'center'}, text="Marketplace", object_id='#start-game',
+                                   manager=State.MANAGER)
+        self.ui_elements.append(self.marketplace_button)
+
         self.ui_elements.append(
             UIButton(relative_rect=pygame.Rect((-100, -100), (-1, -1)), container=panel,
-                     anchors={'centerx': 'centerx', 'bottom': 'bottom'}, text="Continue", object_id='#start-game')
+                     anchors={'centerx': 'centerx', 'bottom': 'bottom'}, text="Launch Pad", object_id='#start-game')
         )
 
         self.ui_elements.append(
             UIButton(relative_rect=pygame.Rect((100, -100), (-1, -1)), container=panel,
-                     anchors={'centerx': 'centerx', 'bottom': 'bottom'}, text="Back", object_id='#start-game')
+                     anchors={'centerx': 'centerx', 'bottom': 'bottom'}, text="Continue", object_id='#start-game')
         )
 
     def draw(self, screen: Surface):
@@ -48,9 +55,11 @@ class Pause(State):
     def handle_event(self, event):
         if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
             self.get_parent().pop()
+        elif event.type == pygame_gui.UI_BUTTON_PRESSED and event.ui_element == self.ui_elements[-3]:
+            self.get_parent().push(Marketplace())
         elif event.type == pygame_gui.UI_BUTTON_PRESSED and event.ui_element == self.ui_elements[-2]:
-            self.get_parent().pop()  
-        elif event.type == pygame_gui.UI_BUTTON_PRESSED and event.ui_element == self.ui_elements[-1]:
             front = self.get_parent().get_parent()
             front.pop()
             front.pop()
+        elif event.type == pygame_gui.UI_BUTTON_PRESSED and event.ui_element == self.ui_elements[-1]:
+            self.get_parent().pop() 

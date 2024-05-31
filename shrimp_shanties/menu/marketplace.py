@@ -4,7 +4,6 @@ from pygame import Surface
 from pygame_gui.elements import UILabel, UIButton, UIPanel, UIImage
 
 from shrimp_shanties.state import State
-from shrimp_shanties.game import Game
 from shrimp_shanties.asset_manager import AssetManager
 
 import os
@@ -18,7 +17,7 @@ class Marketplace(State):
                                         text="Marketplace Test", anchors={'centerx': 'centerx', 'top': 'top'},
                                         manager=State.MANAGER))
 
-        self.ui_elements.append(UIButton(relative_rect=pygame.Rect((0, 50), (-1, -1)), object_id="#return", 
+        self.ui_elements.append(UIButton(relative_rect=pygame.Rect((0, 50), (-1, -1)), object_id="#start-game", 
                                         text="Back", anchors={'centerx': 'centerx', 'top': 'top'},
                                         manager=State.MANAGER))
 
