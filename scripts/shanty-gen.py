@@ -9,7 +9,7 @@ import csv
 def main():
     parser = argparse.ArgumentParser(prog="shanty-gen", description="Generates a random shanty.", epilog="wassaa")
     parser.add_argument("name", help="name of the shanty (.shanty extension is added automatically)")
-    parser.add_argument("-l", "--len", help="length of the song", default=10000)
+    parser.add_argument("-l", "--len", help="length of the song in beats", default=10000)
     parser.add_argument("--mp4", help="mp4 containing video and audio for the shanty", default="")
     parser.add_argument("--mp3", help="mp3 containing audio for the shanty", default="")
     parser.add_argument("--png", help="png containing the background for the shanty", default="")
@@ -21,21 +21,31 @@ def main():
     info["audio_name"] = args.mp3
     info["background"] = args.png
 
-    index = [("len", "pattern")]
-    count = 0
-    while count < args.len:
-        next_len = random.randrange(30, 240)
-        next_pat = random.choice(list(info["patterns"].keys()))
-        index.append((next_len, next_pat))
-        count += next_len
+    length = int(args.len)
+    if length < 60 or length > 216000:
+        print("Invalid length: ensure length is between 60 and 216000 beats")
+        return
 
     work_dir = SHANTY_DIR / f"{args.name}.shanty"
     os.mkdir(work_dir)
     with open(work_dir / "info.json", 'w') as f:
         json.dump(info, f)
+
     with open(work_dir / "index.csv", 'w', newline="") as f:
+        header = ("len", "pattern")
+        count = 0
+
         w = csv.writer(f)
-        w.writerows(index)
+        w.writerow(header)
+
+        while count < int(args.len):
+            next_len = random.randrange(30, 240)
+            next_pat = random.choice(list(info["patterns"].keys()))
+            w.writerow((next_len, next_pat))
+            count += next_len
+
+
+
 
 
 SHANTY_DIR = pathlib.Path(__file__).parent.parent / "assets" / "shanties"
