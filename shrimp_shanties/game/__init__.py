@@ -3,11 +3,11 @@ from pygame import Surface
 
 from .check.input_timing import InputTiming
 from .entity_manager import EntityManager
+from .pause import Pause
 from .player import Player
 from .rhythm.note_spawner import NoteSpawner
 from .score import Score
 from ..state import State
-from .pause import Pause
 
 
 class Game(State):

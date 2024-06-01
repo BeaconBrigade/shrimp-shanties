@@ -3,7 +3,6 @@ from pygame.event import Event, post
 
 from shrimp_shanties.game.next_id import next_event_id
 
-
 REMOVE_ENTITY = next_event_id()
 
 

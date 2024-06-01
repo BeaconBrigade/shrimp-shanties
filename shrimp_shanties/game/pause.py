@@ -4,7 +4,6 @@ from pygame import Surface
 from pygame_gui.elements import UIPanel, UILabel, UIButton
 
 from ..menu.marketplace import Marketplace
-
 from ..state import State
 
 
@@ -23,8 +22,8 @@ class Pause(State):
         )
 
         self.marketplace_button = UIButton(relative_rect=pygame.Rect((0, -100), (-1, -1)), container=panel,
-                                   anchors={'center': 'center'}, text="Marketplace", object_id='#start-game',
-                                   manager=State.MANAGER)
+                                           anchors={'center': 'center'}, text="Marketplace", object_id='#start-game',
+                                           manager=State.MANAGER)
         self.ui_elements.append(self.marketplace_button)
 
         self.ui_elements.append(
@@ -62,4 +61,4 @@ class Pause(State):
             front.pop()
             front.pop()
         elif event.type == pygame_gui.UI_BUTTON_PRESSED and event.ui_element == self.ui_elements[-1]:
-            self.get_parent().pop() 
+            self.get_parent().pop()

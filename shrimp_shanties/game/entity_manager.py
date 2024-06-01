@@ -1,9 +1,8 @@
-from shrimp_shanties.game.check import ActiveCheck, PassiveCheck
-from shrimp_shanties.game.entity import Entity, REMOVE_ENTITY
 from pygame.event import Event
 
+from shrimp_shanties.game.check import ActiveCheck, PassiveCheck
+from shrimp_shanties.game.entity import Entity, REMOVE_ENTITY
 from shrimp_shanties.game.next_id import next_event_id
-
 
 PROCESS_TURN = next_event_id()
 

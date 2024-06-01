@@ -4,9 +4,10 @@ from pygame import Surface
 from pygame_gui.elements import UILabel, UIButton, UIDropDownMenu
 
 from shrimp_shanties import AssetManager
-from shrimp_shanties.state import State
 from shrimp_shanties.game import Game
 from shrimp_shanties.menu.marketplace import Marketplace
+from shrimp_shanties.state import State
+
 
 class Connection(State):
     def __init__(self):

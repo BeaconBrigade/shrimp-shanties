@@ -1,5 +1,3 @@
-import math
-
 from shrimp_shanties.game.entity import Entity
 from shrimp_shanties.game.entity_manager import PROCESS_TURN
 from shrimp_shanties.game.next_id import next_entity_id
@@ -35,5 +33,5 @@ class NoteSpawner(Entity):
                     self.em.add_entity(Note(dir))
                     print('\033[2J\033[H', end='')
                     print(f"Red: {self.count[Shrimp.RED.value]}, Yellow: {self.count[Shrimp.YELLOW.value]}, "
-                        f"Green: {self.count[Shrimp.GREEN.value]}, Blue: {self.count[Shrimp.BLUE.value]}")
+                          f"Green: {self.count[Shrimp.GREEN.value]}, Blue: {self.count[Shrimp.BLUE.value]}")
             self.beat += change_in_beats

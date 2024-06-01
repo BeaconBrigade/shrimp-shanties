@@ -1,9 +1,9 @@
+import pygame
+from pygame.event import Event
+
+from shrimp_shanties.game.check import ActiveCheck
 from shrimp_shanties.game.next_id import next_event_id
 from shrimp_shanties.game.player import Player
-from shrimp_shanties.game.check import ActiveCheck
-from pygame.event import Event
-import pygame
-
 from shrimp_shanties.game.rhythm.note import Note, Shrimp
 
 INPUT_TIMING = next_event_id()

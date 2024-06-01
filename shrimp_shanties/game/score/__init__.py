@@ -13,7 +13,7 @@ class Score(Entity):
         super().__init__(id=next_entity_id())
         self.scores = [0] * player_count
         self.misses = 0  # Initialize misses count
-        self.base_font_size = 32 
+        self.base_font_size = 32
         self.font = None
 
     def draw(self, screen: Surface):

@@ -1,6 +1,7 @@
-import pygame
-from pathlib import Path
 import os
+from pathlib import Path
+
+import pygame
 
 
 class AssetManager:

@@ -1,12 +1,12 @@
+import random
 from enum import Enum
 
 import pygame
-import random
 from pygame import Surface, Rect
 from pygame.event import post, Event
 
-from shrimp_shanties.game.entity.hitbox import Hitbox
 from shrimp_shanties import AssetManager
+from shrimp_shanties.game.entity.hitbox import Hitbox
 from shrimp_shanties.game.entity_manager import PROCESS_TURN
 from shrimp_shanties.game.next_id import next_entity_id
 
@@ -40,7 +40,7 @@ class Note(Hitbox):
         screen_width, screen_height = screen.get_size()
         x = int(self.x_ratio * screen_width)
         y = int(self.height_ratio * screen_height)
-        sprite=self.sprite.copy()
+        sprite = self.sprite.copy()
         if self.disabled:
             overlay_color = pygame.Color(0, 0, 0).lerp((255, 255, 255), 0.625)
             width, height = self.sprite.get_size()
@@ -85,11 +85,10 @@ class Note(Hitbox):
 
     def scale_sprite(self):
         screen_width, screen_height = pygame.display.get_surface().get_size()
-        scale_factor = min(screen_width*4 / 1000, screen_height*4 / 600)
+        scale_factor = min(screen_width * 4 / 1000, screen_height * 4 / 600)
         new_width = int(self.original_sprite.get_width() * scale_factor)
         new_height = int(self.original_sprite.get_height() * scale_factor)
         self.sprite = pygame.transform.scale(self.original_sprite, (new_width, new_height))
 
     def __str__(self):
         return f"Note(dir={self.note} disabled={self.disabled} sunk={self.is_sunk})"
-

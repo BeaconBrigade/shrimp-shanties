@@ -3,11 +3,9 @@ import pygame_gui
 from pygame import Surface
 from pygame_gui.elements import UILabel, UIButton, UIPanel, UIImage
 
-from shrimp_shanties.state import State
 from shrimp_shanties.asset_manager import AssetManager
+from shrimp_shanties.state import State
 
-import os
-from pathlib import Path
 
 class Marketplace(State):
     def __init__(self):
@@ -17,9 +15,9 @@ class Marketplace(State):
                                         text="Marketplace Test", anchors={'centerx': 'centerx', 'top': 'top'},
                                         manager=State.MANAGER))
 
-        self.ui_elements.append(UIButton(relative_rect=pygame.Rect((0, 50), (-1, -1)), object_id="#start-game", 
-                                        text="Back", anchors={'centerx': 'centerx', 'top': 'top'},
-                                        manager=State.MANAGER))
+        self.ui_elements.append(UIButton(relative_rect=pygame.Rect((0, 50), (-1, -1)), object_id="#start-game",
+                                         text="Back", anchors={'centerx': 'centerx', 'top': 'top'},
+                                         manager=State.MANAGER))
 
     def load_image_assets(self):
         image_files = AssetManager.list_cosmetics()
@@ -40,12 +38,12 @@ class Marketplace(State):
             x = (i % 3) * (panel_width + spacing) + spacing
             y = (i // 3) * (panel_height + spacing) + spacing
 
-            panel = UIPanel(relative_rect=pygame.Rect((x, y+100), (panel_width, panel_height)),
-                        manager=State.MANAGER, anchors={'left': 'left', 'top': 'top'})
+            panel = UIPanel(relative_rect=pygame.Rect((x, y + 100), (panel_width, panel_height)),
+                            manager=State.MANAGER, anchors={'left': 'left', 'top': 'top'})
 
             image_element = UIImage(relative_rect=pygame.Rect((0, 0), (panel_width, panel_height)),
-                                image_surface=image, manager=State.MANAGER,
-                                container=panel, anchors={'centerx': 'centerx', 'centery': 'centery'})
+                                    image_surface=image, manager=State.MANAGER,
+                                    container=panel, anchors={'centerx': 'centerx', 'centery': 'centery'})
 
             self.ui_elements.append(panel)
             self.ui_elements.append(image_element)

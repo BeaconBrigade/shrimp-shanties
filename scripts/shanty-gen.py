@@ -1,9 +1,9 @@
 import argparse
+import csv
+import json
+import os
 import pathlib
 import random
-import os
-import json
-import csv
 
 
 def main():
@@ -43,9 +43,6 @@ def main():
             next_pat = random.choice(list(info["patterns"].keys()))
             w.writerow((next_len, next_pat))
             count += next_len
-
-
-
 
 
 SHANTY_DIR = pathlib.Path(__file__).parent.parent / "assets" / "shanties"
