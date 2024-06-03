@@ -3,10 +3,11 @@ from pygame import Surface
 
 from .check.input_timing import InputTiming
 from .entity_manager import EntityManager
+from .over import Over
 from .pause import Pause
 from .player import Player
 from .rhythm.note_spawner import NoteSpawner
-from .score import Score
+from .score import Score, END_INFO
 from ..state import State
 
 
@@ -27,6 +28,8 @@ class Game(State):
     def handle_event(self, event):
         if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
             self.push(Pause())
+        elif event.type == END_INFO:
+            self.push(Over(event.score, event.misses, event.percent))
         else:
             self.em.handle_event(event)
 

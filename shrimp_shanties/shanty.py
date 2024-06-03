@@ -53,7 +53,7 @@ class Shanty:
                 break
             num += p.length
         else:
-            raise Exception("beat not in shanty")
+            raise SongOver()
 
         # find offset into pattern
         pat_info = self.patterns[pat.name]
@@ -76,3 +76,7 @@ class BeatLoadError(Exception):
 
     def __str__(self):
         return f'BeatLoadError({self._e})'
+
+
+class SongOver(Exception):
+    pass

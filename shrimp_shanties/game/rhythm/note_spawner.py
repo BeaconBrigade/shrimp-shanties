@@ -1,8 +1,12 @@
+from pygame.event import post, Event
+
 from shrimp_shanties.game.entity import Entity
 from shrimp_shanties.game.entity_manager import PROCESS_TURN
-from shrimp_shanties.game.next_id import next_entity_id
+from shrimp_shanties.game.next_id import next_entity_id, next_event_id
 from shrimp_shanties.game.rhythm.note import Note, Shrimp
-from shrimp_shanties.shanty import Shanty
+from shrimp_shanties.shanty import Shanty, SongOver
+
+SONG_OVER = next_event_id()
 
 
 class NoteSpawner(Entity):
@@ -27,11 +31,14 @@ class NoteSpawner(Entity):
             # print(f"start={self.beat:04} change={change_in_beats:04} elapsed={list(elapsed_beats)}")
             # create another note based on the song timings
             for beat in elapsed_beats:
-                dir = self.shanty.note(beat)
-                if dir is not None:
-                    self.count[dir.value] += 1
-                    self.em.add_entity(Note(dir))
-                    print('\033[2J\033[H', end='')
-                    print(f"Red: {self.count[Shrimp.RED.value]}, Yellow: {self.count[Shrimp.YELLOW.value]}, "
-                          f"Green: {self.count[Shrimp.GREEN.value]}, Blue: {self.count[Shrimp.BLUE.value]}")
+                try:
+                    dir = self.shanty.note(beat)
+                    if dir is not None:
+                        self.count[dir.value] += 1
+                        self.em.add_entity(Note(dir))
+                        print('\033[2J\033[H', end='')
+                        print(f"Red: {self.count[Shrimp.RED.value]}, Yellow: {self.count[Shrimp.YELLOW.value]}, "
+                              f"Green: {self.count[Shrimp.GREEN.value]}, Blue: {self.count[Shrimp.BLUE.value]}")
+                except SongOver:
+                    post(Event(SONG_OVER, out_of=sum(self.count) * 1000))
             self.beat += change_in_beats
