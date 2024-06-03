@@ -24,14 +24,15 @@ class Player(Hitbox):
 
         # Updates the hitbox position and size.
         self.sprite_dims = Rect(hitbox_left, hitbox_top, hitbox_width, hitbox_height)
-        self.pos = Rect(0., window_height * 0.6, window_width, 10)
+        line_height = window_height * .015 # Thickness
+        self.pos = Rect(0., hitbox_top, window_width, line_height)
 
     def dimensions(self) -> Rect:
         return self.pos
 
     def draw(self, screen: Surface):
         pygame.draw.rect(screen, (255, 255, 255), self.pos)
-        pygame.draw.rect(screen, (3, 68, 171), Rect(self.pos.left, self.pos.bottom, self.pos.width, 400))
+        pygame.draw.rect(screen, (3, 68, 171), Rect(self.pos.left, self.pos.bottom, self.pos.width, screen.get_height() - self.pos.bottom))
 
     def register_for_events(self, em):
         em.register_event(self, pygame.VIDEORESIZE)
