@@ -40,5 +40,9 @@ class NoteSpawner(Entity):
                         print(f"Red: {self.count[Shrimp.RED.value]}, Yellow: {self.count[Shrimp.YELLOW.value]}, "
                               f"Green: {self.count[Shrimp.GREEN.value]}, Blue: {self.count[Shrimp.BLUE.value]}")
                 except SongOver:
-                    post(Event(SONG_OVER, out_of=sum(self.count) * 1000))
+                    for entity in self.em.entity_list:
+                        if isinstance(entity, Note):
+                            break
+                    else:
+                        post(Event(SONG_OVER, out_of=sum(self.count) * 1000))
             self.beat += change_in_beats

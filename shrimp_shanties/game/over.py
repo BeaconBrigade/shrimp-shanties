@@ -24,6 +24,28 @@ class Over(State):
                     manager=State.MANAGER)
         )
 
+        percent = int(round(self.percent))
+        if percent < 50:
+            letter = 'F'
+        elif percent < 70:
+            letter = 'D'
+        elif percent < 80:
+            letter = 'C'
+        elif percent < 90:
+            letter = 'B'
+        elif percent < 100:
+            letter = 'A'
+        elif percent == 100:
+            letter = 'S'
+        else:
+            raise Exception("you are dumb")
+        self.ui_elements.append(
+            UILabel(relative_rect=pygame.Rect((0, 200), (-1, -1)), container=panel,
+                    anchors={'centerx': 'centerx', 'top': 'top'},
+                    text=f'{percent} % ({letter})', object_id='#start-game',
+                    manager=State.MANAGER)
+        )
+
         self.ui_elements.append(
             UILabel(relative_rect=pygame.Rect((0, 250), (-1, -1)), container=panel,
                     anchors={'centerx': 'centerx', 'top': 'top'},
@@ -34,7 +56,7 @@ class Over(State):
         self.ui_elements.append(
             UILabel(relative_rect=pygame.Rect((0, 320), (-1, -1)), container=panel,
                     anchors={'centerx': 'centerx', 'top': 'top'},
-                    text=f'{self.misses} misses ({int(round(self.percent)):2} %)', object_id='#start-game',
+                    text=f'{self.misses} misses', object_id='#start-game',
                     manager=State.MANAGER)
         )
 
