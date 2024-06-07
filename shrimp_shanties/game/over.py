@@ -42,7 +42,7 @@ class Over(State):
             letter = 'S'
         else:
             raise Exception("you are dumb")
-        pygame.mixer.Sound.play(end_sound)
+        end_sound.play()
         self.ui_elements.append(
             UILabel(relative_rect=pygame.Rect((0, 200), (-1, -1)), container=panel,
                     anchors={'centerx': 'centerx', 'top': 'top'},

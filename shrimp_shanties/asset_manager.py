@@ -27,12 +27,13 @@ class AssetManager:
         return asset
 
     @staticmethod
+    def load_shanty_music(shanty: str, name: str):
+        pygame.mixer.music.load(AssetManager.ASSET_PATH / "shanties" / shanty / name)
+        return True
+
+    @staticmethod
     def load_music(name: str):
-        hash_name = f'music/{name}'
-        if hash_name in AssetManager.cache:
-            return AssetManager.cache[hash_name]
-        pygame.mixer.music.load(AssetManager.ASSET_PATH / "audio" / name)
-        AssetManager.cache[hash_name] = True
+        pygame.mixer.music.load(AssetManager.ASSET_PATH / "music" / name)
         return True
 
     @staticmethod

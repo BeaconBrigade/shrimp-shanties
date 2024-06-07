@@ -68,9 +68,10 @@ class Note(Hitbox):
             # multiply speed by delta in seconds to run at 60 fps
             self.height_ratio += 0.01 * event.delta * 60
             if self.height_ratio > 0.62 and not self.is_sunk:
-                sunk_sound = AssetManager.load_sound("combobreak.mp3")
-                sunk_sound.set_volume(0.5)
-                pygame.mixer.Sound.play(sunk_sound)
+                if not self.disabled:
+                    sunk_sound = AssetManager.load_sound("combobreak.mp3")
+                    sunk_sound.set_volume(0.5)
+                    sunk_sound.play()
                 self.is_sunk = True
                 if not self.disabled:
                     from shrimp_shanties.game.check.input_timing import INPUT_TIMING

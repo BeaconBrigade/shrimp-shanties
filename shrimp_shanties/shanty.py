@@ -16,6 +16,7 @@ class Shanty:
     """ The class for containing patterns about a beat and deciding when to emit a note """
 
     def __init__(self, path):
+        self.file_name = path
         path = AssetManager.load_shanty(path)
         try:
             with open(path / 'info.json') as f:

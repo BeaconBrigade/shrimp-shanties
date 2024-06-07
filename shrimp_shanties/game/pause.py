@@ -53,6 +53,7 @@ class Pause(State):
 
     def handle_event(self, event):
         if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+            pygame.mixer.music.unpause()
             self.get_parent().pop()
         elif event.type == pygame_gui.UI_BUTTON_PRESSED and event.ui_element == self.ui_elements[-3]:
             self.get_parent().push(Marketplace())
@@ -61,4 +62,5 @@ class Pause(State):
             front.pop()
             front.pop()
         elif event.type == pygame_gui.UI_BUTTON_PRESSED and event.ui_element == self.ui_elements[-1]:
+            pygame.mixer.music.unpause()
             self.get_parent().pop()

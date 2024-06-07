@@ -12,9 +12,9 @@ SONG_OVER = next_event_id()
 class NoteSpawner(Entity):
     """ Spawn notes for a song """
 
-    def __init__(self, shanty: str):
+    def __init__(self, shanty: Shanty):
         super().__init__(next_entity_id())
-        self.shanty = Shanty(shanty)
+        self.shanty = shanty
         print(self.shanty)
         self.beat = 0
         self.em = None
