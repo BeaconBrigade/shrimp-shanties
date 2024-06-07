@@ -4,6 +4,7 @@ from pygame import Surface
 from pygame_gui.elements import UIPanel, UILabel, UIButton
 
 from shrimp_shanties.menu.marketplace import Marketplace
+from .. import AssetManager
 from ..state import State
 
 
@@ -25,7 +26,9 @@ class Over(State):
         )
 
         percent = int(round(self.percent))
+        end_sound = AssetManager.load_sound("sectionpass.mp3")
         if percent < 50:
+            end_sound = AssetManager.load_sound("sectionfail.mp3")
             letter = 'F'
         elif percent < 70:
             letter = 'D'
@@ -39,6 +42,7 @@ class Over(State):
             letter = 'S'
         else:
             raise Exception("you are dumb")
+        pygame.mixer.Sound.play(end_sound)
         self.ui_elements.append(
             UILabel(relative_rect=pygame.Rect((0, 200), (-1, -1)), container=panel,
                     anchors={'centerx': 'centerx', 'top': 'top'},
