@@ -1,4 +1,5 @@
 import pygame
+import pygame_gui
 from pygame import Surface
 from pygame_gui.elements.ui_label import UILabel
 
@@ -42,6 +43,13 @@ class FrontPage(State):
 
                 # Draw the rectangle with a light gray color
                 pygame.draw.rect(screen, (3, 68, 171), pygame.Rect(rect_left, rect_top, rect_width, rect_height))
+
+    def propagate_event(self, event):
+        if event.type == pygame_gui.UI_BUTTON_PRESSED:
+            click = AssetManager.load_sound("button-click.wav")
+            click.set_volume(0.5)
+            click.play()
+        super().propagate_event(event)
 
     def handle_event(self, event):
         if event.type == pygame.KEYDOWN:
