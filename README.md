@@ -1,4 +1,4 @@
-# `shrimp-shanties`
+# `shrimp-shanties` - v0.1.0
 
 Shrimp shanties is a rhythm game where you try to catch shrimp falling into the water
 on the time of the beat. There are multiple songs you can play to have a unique experience
@@ -120,13 +120,25 @@ also aren't required to be in the virtual environment. `shanty-gen.py` randomly 
 given name and optionally given music/video/backgrounds. You can specify multiple parameters about the
 generated shanty. Try running `python shanty-gen.py -h` to see more information.
 
-## Installation: Development
+## Downloading: Git
 
 ```bash
 # clone the code
 git clone https://github.com/beaconbrigade/shrimp-shanties.git
 cd shrimp-shanties
+```
 
+## Downloading: Zip
+
+Download the zip file listed under the green "Code" button placed just above and to the right of the
+file structure of the project. Select the "Download ZIP" button to get a zip of the project. Once 
+downloaded, unzip the folder and open a terminal into the folder. 
+
+## Installing Dependencies and Setting up Virtual Environment
+
+Run the following commands from within the directory installed through git or zip.
+
+```bash
 # set up python virtual environment
 python -m venv venv
 # on windows run:
@@ -138,9 +150,9 @@ python -m venv venv
 pip install -r requirements.txt
 ```
 
-## Running: Development
+## Running
 
-It does not matter what directory you run `main.py` from, it will find the game and assets folders.
+Note: It does not matter what directory you run `main.py` from, it will find the game and assets folders.
 
 ```bash
 # in the virtual environment:
