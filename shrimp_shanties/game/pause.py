@@ -3,6 +3,7 @@ import pygame_gui
 from pygame import Surface
 from pygame_gui.elements import UIPanel, UILabel, UIButton
 
+from .. import AssetManager
 from ..menu.marketplace import Marketplace
 from ..state import State
 
@@ -54,6 +55,8 @@ class Pause(State):
     def handle_event(self, event):
         if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
             pygame.mixer.music.unpause()
+            click = AssetManager.load_sound("button-click.wav")
+            click.play()
             self.get_parent().pop()
         elif event.type == pygame_gui.UI_BUTTON_PRESSED and event.ui_element == self.ui_elements[-3]:
             self.get_parent().push(Marketplace())

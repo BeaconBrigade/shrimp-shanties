@@ -47,12 +47,13 @@ class FrontPage(State):
     def propagate_event(self, event):
         if event.type == pygame_gui.UI_BUTTON_PRESSED:
             click = AssetManager.load_sound("button-click.wav")
-            click.set_volume(0.5)
             click.play()
         super().propagate_event(event)
 
     def handle_event(self, event):
         if event.type == pygame.KEYDOWN:
+            click = AssetManager.load_sound("button-click.wav")
+            click.play()
             self.push(Connection())
         elif event.type == pygame.VIDEORESIZE:
             self.scale_background()  # Scale the background when the window is resized

@@ -55,6 +55,10 @@ class Marketplace(State):
         if event.type == pygame_gui.UI_BUTTON_PRESSED and event.ui_element == self.ui_elements[-1]:
             self.get_parent().pop()
         elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+            click = AssetManager.load_sound("button-click.wav")
+            click.play()
             self.get_parent().pop()
         elif event.type == pygame.KEYDOWN:
+            click = AssetManager.load_sound("button-click.wav")
+            click.play()
             self.get_parent().pop()

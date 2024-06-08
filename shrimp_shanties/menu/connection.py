@@ -4,7 +4,7 @@ from pygame import Surface
 from pygame_gui.elements import UILabel, UIButton, UIDropDownMenu
 
 from shrimp_shanties import AssetManager
-from shrimp_shanties.game import Game
+from shrimp_shanties.game.startup import Startup
 from shrimp_shanties.menu.marketplace import Marketplace
 from shrimp_shanties.state import State
 
@@ -43,15 +43,18 @@ class Connection(State):
             pygame.event.clear()
             # TODO: actually connect to other players
             print("Multiplayer connectivity not currently supported.")
-            self.push(Game(self.ui_elements[-1].selected_option))
+            self.push(Startup(self.ui_elements[-1].selected_option))
         if event.type == pygame_gui.UI_BUTTON_PRESSED and event.ui_element == self.ui_elements[2]:
             pygame.event.clear()
-            self.push(Game(self.ui_elements[-1].selected_option))
+            self.push(Startup(self.ui_elements[-1].selected_option))
         elif event.type == pygame_gui.UI_BUTTON_PRESSED and event.ui_element == self.ui_elements[3]:
             pygame.event.clear()
             self.push(Marketplace())
         elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+            click = AssetManager.load_sound("button-click.wav")
+            click.play()
             self.get_parent().pop()
         elif event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+            # not playing sound here as it overlaps with the Startup beeps
             pygame.event.clear()
-            self.push(Game(self.ui_elements[-1].selected_option))
+            self.push(Startup(self.ui_elements[-1].selected_option))
