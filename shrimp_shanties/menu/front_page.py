@@ -15,6 +15,7 @@ class FrontPage(State):
         self.original_background = AssetManager.load_texture('front-background.png')
         self.background = self.original_background
         self.scale_background()  # Scale the background initially
+        self.start_menu_music()
 
         self.ui_elements.append(UILabel(relative_rect=pygame.Rect((0, HEIGHT / 8), (-1, -1)), text="Shrimp Shanties",
                                         anchors={'centerx': 'centerx', 'top': 'top'}, object_id="#title",
@@ -23,6 +24,10 @@ class FrontPage(State):
             UILabel(relative_rect=pygame.Rect((0, HEIGHT / 3), (-1, -1)), object_id="@subheading",
                     text="Press enter to continue", anchors={'centerx': 'centerx'},
                     manager=State.MANAGER))
+
+    def start_menu_music(self):
+        AssetManager.load_music("temporary-menu.mp3")
+        pygame.mixer.music.play(-1)
 
     def register_for_events(self, em):
         em.register_event(self, pygame.VIDEORESIZE)

@@ -20,11 +20,14 @@ class Game(State):
         self.em = EntityManager()
         self.em.add_entity(Player())
         self.em.add_entity(Score())
-        shanty = Shanty(shanty)
-        self.em.add_entity(NoteSpawner(shanty))
+        self.shanty = Shanty(shanty)
+        self.em.add_entity(NoteSpawner(self.shanty))
         InputTiming(self.em)
-        if shanty.audio_name != "":
-            AssetManager.load_shanty_music(shanty.file_name, shanty.audio_name)
+        pygame.mixer.music.unload()
+
+    def start_music(self):
+        if self.shanty.audio_name != "":
+            AssetManager.load_shanty_music(self.shanty.file_name, self.shanty.audio_name)
             pygame.mixer.music.play(-1)
 
     def draw(self, screen: Surface):

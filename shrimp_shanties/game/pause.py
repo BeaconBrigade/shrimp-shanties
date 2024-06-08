@@ -62,6 +62,7 @@ class Pause(State):
             self.get_parent().push(Marketplace())
         elif event.type == pygame_gui.UI_BUTTON_PRESSED and event.ui_element == self.ui_elements[-2]:
             front = self.get_parent().get_parent()
+            front.get_parent().start_menu_music()
             front.pop()
             front.pop()
         elif event.type == pygame_gui.UI_BUTTON_PRESSED and event.ui_element == self.ui_elements[-1]:

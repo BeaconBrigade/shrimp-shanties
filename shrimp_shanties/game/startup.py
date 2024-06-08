@@ -42,6 +42,7 @@ class Startup(State):
             self.ui_elements[0].set_text("Go!")
         elif self.counter < 1:
             self.get_parent().pop()
+            self.game.start_music()
             self.get_parent().push(self.game)
             return
 
