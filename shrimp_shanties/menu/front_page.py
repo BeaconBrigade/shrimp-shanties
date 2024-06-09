@@ -27,6 +27,7 @@ class FrontPage(State):
 
     def start_menu_music(self):
         AssetManager.load_music("temporary-menu.mp3")
+        pygame.mixer.music.set_volume(0.5)
         pygame.mixer.music.play(-1)
 
     def register_for_events(self, em):

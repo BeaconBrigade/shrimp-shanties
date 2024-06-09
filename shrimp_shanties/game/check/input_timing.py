@@ -42,7 +42,6 @@ class InputTiming(ActiveCheck):
         # Performs a collision check
         if nearest_item and self.player.intersects_with(nearest_item.dimensions()):
             hit_sound = AssetManager.load_sound("drum-hitclap.mp3")
-            hit_sound.set_volume(0.5)
             hit_sound.play()
             nearest_item.remove()
             # Returns an event for increasing the score
@@ -51,7 +50,6 @@ class InputTiming(ActiveCheck):
 
         if nearest_item is not None and not nearest_item.is_sunk:
             miss_sound = AssetManager.load_sound("soft-hitfinish.mp3")
-            miss_sound.set_volume(0.5)
             miss_sound.play()
             nearest_item.disabled = True
             return Event(INPUT_TIMING, success=False, score=1.0, player_id=self.player.id)

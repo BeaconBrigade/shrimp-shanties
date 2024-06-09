@@ -28,6 +28,7 @@ class Game(State):
     def start_music(self):
         if self.shanty.audio_name != "":
             AssetManager.load_shanty_music(self.shanty.file_name, self.shanty.audio_name)
+            pygame.mixer.music.set_volume(1.0)
             pygame.mixer.music.play(-1)
 
     def draw(self, screen: Surface):
