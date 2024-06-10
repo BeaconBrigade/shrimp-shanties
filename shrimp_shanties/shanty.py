@@ -66,6 +66,9 @@ class Shanty:
             return Shrimp(int(d))
         return None
 
+    def length(self):
+        return sum(x.length for x in self.index)
+
     def __str__(self):
         return f"Shanty(name='{self.name}', va={self.video_audio}, an={self.audio_name}, b={self.background}, " + \
             f"p={self.patterns}, index={self.index})"
