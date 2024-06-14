@@ -32,13 +32,14 @@ class NoteSpawner(Entity):
             # create another note based on the song timings
             for beat in elapsed_beats:
                 try:
-                    dir = self.shanty.note(beat)
-                    if dir is not None:
-                        self.count[dir.value] += 1
-                        self.em.add_entity(Note(dir))
-                        print('\033[2J\033[H', end='')
-                        print(f"Red: {self.count[Shrimp.RED.value]}, Yellow: {self.count[Shrimp.YELLOW.value]}, "
-                              f"Green: {self.count[Shrimp.GREEN.value]}, Blue: {self.count[Shrimp.BLUE.value]}")
+                    dirs = self.shanty.note(beat)
+                    if dirs is not None:
+                        for dir in dirs:
+                            self.count[dir.value] += 1
+                            self.em.add_entity(Note(dir))
+                            print('\033[2J\033[H', end='')
+                            print(f"Red: {self.count[Shrimp.RED.value]}, Yellow: {self.count[Shrimp.YELLOW.value]}, "
+                                  f"Green: {self.count[Shrimp.GREEN.value]}, Blue: {self.count[Shrimp.BLUE.value]}")
                 except SongOver:
                     for entity in self.em.entity_list:
                         if isinstance(entity, Note):

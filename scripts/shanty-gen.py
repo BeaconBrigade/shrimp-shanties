@@ -72,7 +72,8 @@ INFO_TEMPLATE = {
             "shstair": {"len": 30, "0": 1, "15": 0},
 
             "hbwstair": {"len": 30, "0": 2, "15": 3},
-            "shbwstair": {"len": 30, "0": 0, "15": 1}
+            "shbwstair": {"len": 30, "0": 0, "15": 1},
+            "line": {"len": 30, "0": [0, 1, 2, 3]}
         }
 }
 

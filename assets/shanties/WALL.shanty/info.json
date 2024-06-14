@@ -1,1 +1,1 @@
-{"name": "WALL", "video_audio": "", "audio_name": "THEWALL.mp3", "background": "", "patterns": {"WALL": {"len": 4, "0": 0, "1": 1, "2": 2, "3":  3}, "hang":  {"len":  60}}}
+{"name": "WALL", "video_audio": "", "audio_name": "THEWALL.mp3", "background": "", "patterns": {"WALL": {"len": 1, "0": [0, 1, 2, 3]}, "hang":  {"len":  60}}}

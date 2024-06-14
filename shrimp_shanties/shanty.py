@@ -31,7 +31,10 @@ class Shanty:
                     self.patterns[name] = dict()
                     self.patterns[name]["len"] = value["len"]
                     for k, v in list(value.items())[1:]:
-                        self.patterns[name][int(k)] = v
+                        if isinstance(v, list):
+                            self.patterns[name][int(k)] = v
+                        else:
+                            self.patterns[name][int(k)] = [v]
 
             with open(path / 'index.csv') as f:
                 self.index = []
@@ -63,7 +66,7 @@ class Shanty:
         # return note from pattern
         d = pat_info.get(offset)
         if d is not None:
-            return Shrimp(int(d))
+            return [Shrimp(int(d)) for d in d]
         return None
 
     def length(self):
