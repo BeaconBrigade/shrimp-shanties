@@ -1,9 +1,10 @@
 import pygame
 import pygame_gui
 from pygame import Surface
-from pygame_gui.elements import UIPanel, UILabel, UIButton
+from pygame_gui.elements import UIPanel, UILabel, UIButton, UIImage
 
-from shrimp_shanties.menu.marketplace import Marketplace
+from ..menu.marketplace import Marketplace
+from .. import HEIGHT
 from .. import AssetManager
 from ..state import State
 
@@ -15,7 +16,7 @@ class Over(State):
         self.misses = misses
         self.percent = percent
 
-        panel = UIPanel(relative_rect=pygame.Rect((0, 40), (400, 500)), anchors={'centerx': 'centerx', 'top': 'top'},
+        panel = UIPanel(relative_rect=pygame.Rect((0, 0), (400, HEIGHT*0.9)), anchors={'centerx': 'centerx', 'centery': 'centery'},
                         object_id="#pause-panel", manager=State.MANAGER)
         self.ui_elements.append(panel)
 
@@ -25,7 +26,7 @@ class Over(State):
                     manager=State.MANAGER)
         )
 
-        percent = int(round(self.percent))
+        percent = round(self.percent, 2)
         end_sound = AssetManager.load_sound("sectionpass.mp3")
         if percent < 50:
             end_sound = AssetManager.load_sound("sectionfail.mp3")
@@ -43,28 +44,44 @@ class Over(State):
         else:
             raise Exception("you are dumb")
         end_sound.play()
-        self.ui_elements.append(
-            UILabel(relative_rect=pygame.Rect((0, 200), (-1, -1)), container=panel,
-                    anchors={'centerx': 'centerx', 'top': 'top'},
-                    text=f'{percent} % ({letter})', object_id='#start-game',
-                    manager=State.MANAGER)
-        )
+        if percent == 100:
+            # Display the image separately
+            image = AssetManager.load_texture('s.png')
+            self.ui_elements.append(
+                UIImage(relative_rect=pygame.Rect((0, 180), (image.get_width()/2, image.get_height()/2)),
+                        container=panel, anchors={'centerx': 'centerx', 'top': 'top'},
+                        image_surface=image, manager=State.MANAGER)
+            )  
+            self.ui_elements.append(
+                UILabel(relative_rect=pygame.Rect((0, 240), (-1, -1)), container=panel,
+                        anchors={'centerx': 'centerx', 'top': 'top'},
+                        text=f'{percent}%', object_id='#start-game',
+                        manager=State.MANAGER)
+            ) 
+        else:
+            # Display the text with the letter grade
+            self.ui_elements.append(
+                UILabel(relative_rect=pygame.Rect((0, 240), (-1, -1)), container=panel,
+                        anchors={'centerx': 'centerx', 'top': 'top'},
+                        text=f'{percent}% ({letter})', object_id='#start-game',
+                        manager=State.MANAGER)
+            )
 
         self.ui_elements.append(
-            UILabel(relative_rect=pygame.Rect((0, 250), (-1, -1)), container=panel,
+            UILabel(relative_rect=pygame.Rect((0, 290), (-1, -1)), container=panel,
                     anchors={'centerx': 'centerx', 'top': 'top'},
                     text=f'You scored {self.score} points!', object_id='#start-game',
                     manager=State.MANAGER)
         )
 
         self.ui_elements.append(
-            UILabel(relative_rect=pygame.Rect((0, 320), (-1, -1)), container=panel,
+            UILabel(relative_rect=pygame.Rect((0, 360), (-1, -1)), container=panel,
                     anchors={'centerx': 'centerx', 'top': 'top'},
                     text=f'{self.misses} misses', object_id='#start-game',
                     manager=State.MANAGER)
         )
 
-        self.market = UIButton(relative_rect=pygame.Rect((0, -100), (-1, -1)), container=panel,
+        self.market = UIButton(relative_rect=pygame.Rect((0, -140), (-1, -1)), container=panel,
                                anchors={'center': 'center'}, text="Marketplace", object_id='#start-game',
                                manager=State.MANAGER)
         self.ui_elements.append(self.market)

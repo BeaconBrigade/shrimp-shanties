@@ -1,4 +1,4 @@
-# `shrimp-shanties` - v0.1.0
+# `shrimp-shanties` - v0.1.1
 
 Shrimp shanties is a rhythm game where you try to catch shrimp falling into the water
 on the time of the beat. There are multiple songs you can play to have a unique experience
@@ -136,6 +136,7 @@ downloaded, unzip the folder and open a terminal into the folder.
 
 ## Installing Dependencies and Setting up Virtual Environment
 
+Ensure you have Python 3.12.4 installed or later versions.
 Run the following commands from within the directory installed through git or zip.
 
 ```bash
