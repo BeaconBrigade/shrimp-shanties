@@ -15,6 +15,8 @@ def main():
 
     pygame.init()
 
+    icon = AssetManager.load_texture('SB.ico')
+    pygame.display.set_icon(icon)
     screen = pygame.display.set_mode(size=[WIDTH, HEIGHT], flags=pygame.RESIZABLE)
     clock = pygame.time.Clock()
     pygame.display.set_caption("Shrimp Shanties")
