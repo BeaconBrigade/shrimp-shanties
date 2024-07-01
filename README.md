@@ -136,7 +136,7 @@ downloaded, unzip the folder and open a terminal into the folder.
 
 ## Installing Dependencies and Setting up Virtual Environment
 
-Ensure you have Python 3.12.4 installed or later versions.
+Running in Python: Ensure you have Python 3.12.4 installed or later versions.
 
 Run the following commands from within the directory installed through git or zip.
 
@@ -151,6 +151,8 @@ python -m venv venv
 # install dependencies
 pip install -r requirements.txt
 ```
+
+Running in .exe file: Ensure root directory path is "C:\shrimp-shanties"
 
 ## Running
 
