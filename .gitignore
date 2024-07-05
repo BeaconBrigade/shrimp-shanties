@@ -3,5 +3,4 @@ venv
 **/__pycache__
 
 steal
-main.spec
 build
