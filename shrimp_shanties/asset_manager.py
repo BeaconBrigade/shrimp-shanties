@@ -1,11 +1,15 @@
 import os
 from pathlib import Path
+import sys
 
 import pygame
 
 
 class AssetManager:
-    ASSET_PATH = Path(__file__).parent / ".." / "assets"
+    if getattr(sys, 'frozen', False) and hasattr(sys, "_MEIPASS"):
+        ASSET_PATH = Path(sys._MEIPASS) / "assets"
+    else:
+        ASSET_PATH = Path(__file__).parent / ".." / "assets"
     cache = dict()
 
     @staticmethod

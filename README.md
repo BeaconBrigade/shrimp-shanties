@@ -162,3 +162,19 @@ Note: It does not matter what directory you run `main.py` from, it will find the
 # in the virtual environment:
 python main.py
 ```
+
+## Building with PyInstaller
+
+With PyInstaller installed you can create executables using the including spec files. While in the
+project directory run:
+
+```bash
+pyinstaller main.spec
+```
+
+This will create a `dist` and `build` folder. The `dist/main` folder will contain the
+executable for `shrimp-shanties` as well as the assets and dependencies it needs to run.
+You can zip up the `main` folder (rename it `shrimp-shanties`) and send that to any computer
+that wants to run `shrimp-shanties`. They will not need to have any version of python or
+depenedencies installed.
+

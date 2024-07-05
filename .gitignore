@@ -4,3 +4,8 @@ venv
 
 steal
 build
+dist
+
+# macos specific
+.DS_Store
+
