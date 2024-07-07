@@ -178,16 +178,6 @@ project directory run:
 pyinstaller main.spec
 ```
 
-This will create a `dist` and `build` folder. The `dist/main` folder will contain the
-executable for `shrimp-shanties` as well as the assets and dependencies it needs to run.
-You can zip up the `main` folder (rename it `shrimp-shanties`) and send that to any computer
-that wants to run `shrimp-shanties`. They will not need to have any version of python or
-depenedencies installed.
+This will create a `dist` and `build` folder. The executable will be installed in the `dist` folder.
+The executable should be titled `shrimp-shanties` (linux/mac) or `shrimp-shanties.exe` (windows).
 
-If you are releasing an Executable, clear all installed modules, then reinstall the requirements. 
-
-Now you can run:
-
-```bash
-python -m PyInstaller --onefile --noconsole main.py --icon=assets/textures/shrimpsprite.ico --add-data "assets/textures:assets/textures" --add-data "assets:assets" --add-data "shrimp_shanties:shrimp_shanties"
-```
