@@ -134,9 +134,9 @@ Download the zip file listed under the green "Code" button placed just above and
 file structure of the project. Select the "Download ZIP" button to get a zip of the project. Once 
 downloaded, unzip the folder and open a terminal into the folder. 
 
-## Installing Dependencies and Setting up Virtual Environment
+## Installing Dependencies and Setting up Virtual Environment in Python
 
-Running in Python: Ensure you have Python 3.12.4 installed or later versions.
+Ensure you have Python 3.12.4 installed or later versions.
 
 Run the following commands from within the directory installed through git or zip.
 
@@ -152,9 +152,7 @@ python -m venv venv
 pip install -r requirements.txt
 ```
 
-Running in .exe file: Ensure root directory path is "C:\shrimp-shanties"
-
-## Running
+## Running in Python
 
 Note: It does not matter what directory you run `main.py` from, it will find the game and assets folders.
 
@@ -163,7 +161,15 @@ Note: It does not matter what directory you run `main.py` from, it will find the
 python main.py
 ```
 
-## Building with PyInstaller
+## Running as Executable
+
+Note: Running the game using the currently released executable does not allow modifying assets.
+
+Download the latest file Release from GitHub.
+
+Double-click the application, or left click and press "Open".
+
+## Building an Executable using PyInstaller
 
 With PyInstaller installed you can create executables using the including spec files. While in the
 project directory run:
@@ -178,3 +184,10 @@ You can zip up the `main` folder (rename it `shrimp-shanties`) and send that to 
 that wants to run `shrimp-shanties`. They will not need to have any version of python or
 depenedencies installed.
 
+If you are releasing an Executable, clear all installed modules, then reinstall the requirements. 
+
+Now you can run:
+
+```bash
+python -m PyInstaller --onefile --noconsole main.py --icon=assets/textures/shrimpsprite.ico --add-data "assets/textures:assets/textures" --add-data "assets:assets" --add-data "shrimp_shanties:shrimp_shanties"
+```
